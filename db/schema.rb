@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2020_10_06_085746) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer "category", default: 0, null: false
+    t.integer "prefecure", default: 0, null: false
     t.string "post_image_id"
     t.integer "user_id"
     t.text "body"
