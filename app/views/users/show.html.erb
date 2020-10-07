@@ -1,52 +1,69 @@
 <div class="container">
 	<!-- サイドバー -->
-	<div class="col-lg-3">
-		<div class="row">
-			<%= link_to "編集", edit_user_path(current_user),class: "btn btn-success btn-block" %>
-		</div>
-		<div class="row">
-			<div class="col-xs-6">
-				<%= attachment_image_tag @user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg" %>
+	<div class="col-lg-3 sidebar clearfix">
+		<% if user_signed_in? %>
+		<!-- ログイン後 -->
+			<div class="row sidebar__profile--edit pull-right" style="width: 50px;">
+				<%= link_to edit_user_path(current_user) do %>
+				 <i class="glyphicon glyphicon-wrench" aria-hidden="true" style="padding-left: 40px;color:green;"></i>
+				<% end %>
 			</div>
-			<div class="col-xs-6">
-				<%= @user.name %>
+			<div class="row sidebar__profile">
+				<div class="col-xs-6 sidebar__profile--image" style="border-radius: 20px;">
+					<%= attachment_image_tag @user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'80x80', style: "border-radius: 50%;" %>
+				</div>
+				<div class="col-xs-6 sidebar__profile--name">
+					<%= @user.name %>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<%= @user.introduction %>
-		</div>
-		<div class="row">
-			<div class="col-xs-4">制覇数</div>
-			<div class="col-xs-6"></div>
-			<div class="col-xs-2">/47</div>
-		</div>
-		<div class="row">
-			<%= link_to "フォロー一覧", "",class: "btn btn-success btn-block" %>
-		</div>
-		<div class="row">
-			<%= link_to "お気に入り一覧", "",class: "btn btn-success btn-block" %>
-		</div>
-		<div class="row">投稿(月別)</div>
+			<div class="row sidebar__profile--introduction">
+				<%= @user.introduction %>
+			</div>
+			<div class="row sidebar__conquer"style="margin-top: 100px;">
+				<div class="col-xs-4 sidebar__conquer--head">制覇数</div>
+				<div class="col-xs-6 sidebar__conquer--body"></div>
+				<div class="col-xs-2 sidebar__conquer--foot">/47</div>
+			</div>
+			<div class="row sidebar__follow"style="width: 90%;margin: 10px auto;">
+				<%= link_to "フォロー一覧", "",class: "btn btn-info btn-block" %>
+			</div>
+			<div class="row sidebar__favorite"style="width: 90%;margin: 10px auto;">
+				<%= link_to "お気に入り一覧", "",class: "btn btn-warning btn-block" %>
+			</div>
+			<div class="row"style="text-align: center;">投稿(月別)</div>
+		<!-- ここまで -->
+		<% else %>
+			<div class="row">おすすめスポット</div>
+			<div class="row">〇〇県</div>
+			<div class="row">写真</div>
+		<% end %>
 	</div>
 	<!-- ここまで -->
-	<div class="col-lg-9">
+	<div class="col-lg-8 col-lg-offset-1">
+		<!-- スライド -->
+		<div class="row"></div>
+		<!-- 投稿一覧 -->
 		<div class="row">
 			<% @posts.each do |post| %>
-			<div>
-				<div class="row">
-					<%= attachment_image_tag @user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg" %>
-					<p><%= post.prefecure %></p>
-					<p><%= @user.name %></p>
+			<div style="width: 350px;border: 1px solid black;margin: 20px 30px 10px 0;float: left">
+				<div class="row" style="margin: 15px 0 15px 30px;">
+					<%= attachment_image_tag @user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
+					<p style="padding: 10px 0 0 80px;"><%= post.prefecure %></p>
 				</div>
-				<div class="row">
-					<%= attachment_image_tag post, :post_image, :fill, 60, 60, format: 'jpeg' %>
+				<div class="row" style="margin-left: 30px;">
+					<%= attachment_image_tag post, :post_image, size: "290x200", format: 'jpeg' %>
 				</div>
-				<div class="row">
+				<!-- 編集、削除 -->
+				<div class="text-right">
 					<%= link_to edit_post_path do %>
 					  <i class="fas fa-cog"></i>
 					<% end %>
+					<%= link_to post_path,method: :delete do %>
+					  <i class="fas fa-trash-alt" style="margin: 10px 30px 10px 10px;"></i>
+					<% end %>
 				</div>
-				<div class="row">
+				<!-- 内容 -->
+				<div class="row" style="margin: 15px 0 15px 30px;">
 					<%= post.body %>
 				</div>
 			</div>
