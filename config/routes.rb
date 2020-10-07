@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   get 'homes/about' => 'homes#about'
   devise_for :users
   resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-  	resources :comments, only: [:create, :destroy]
-  	resources :favorites, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy]
+    resources :favorites, only: [:create, :destroy]
   end
   resources :users, only: [:show, :edit, :update] do
-  		get 'follows' => 'relationships#follower', as: 'follows'
-  		get 'followers' => 'relationships#followed', as: 'followers'
+    get 'follows' => 'relationships#follower', as: 'follows'
+    get 'followers' => 'relationships#followed', as: 'followers'
   end
   resources :relationships, only: [:create, :destroy]
 

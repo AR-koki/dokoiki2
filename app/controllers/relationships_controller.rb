@@ -1,14 +1,13 @@
 class RelationshipsController < ApplicationController
+  def create
+  end
 
-	def create
-	end
+  def destroy
+  end
 
-	def destroy
-	end
+  def follower
+  end
 
-	def follower
-	end
-
-	def followed
-	end
+  def followed
+  end
 end
