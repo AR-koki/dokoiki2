@@ -1,11 +1,10 @@
 class PrefecuresController < ApplicationController
+  def prefecure
+  end
 
-	def prefecure
+  private
 
-	end
-
-	private
-	def prefecure_params
-		params.require(:prefecure).permit(:prefecure)
-	end
+  def prefecure_params
+    params.require(:prefecure).permit(:prefecure)
+  end
 end
