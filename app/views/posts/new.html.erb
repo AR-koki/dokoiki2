@@ -1,0 +1,30 @@
+<div class="container">
+	<%= form_with model:@post, local: true do |f| %>
+	<div class="col-lg-6">
+		<div class="item-image" style="margin-bottom: 30px;">
+            <%= attachment_image_tag @post, :post_image, fallback: "noimage.png", size:"300x300" %>
+        </div>
+        <%= f.attachment_field :post_image %>
+	</div>
+	<div class="col-lg-6">
+		<div class="row">
+			<div class="col-xs-3">都道府県<br>(撮影場所)</div>
+			<div class="col-xs-9">
+            	<%= f.select :prefecure, Post.prefecures.keys, {}, {class: 'hoge'} %>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-xs-3">カテゴリー</div>
+        	<div class="col-xs-9">
+           		<%= f.select :category, Post.categories.keys, {}, {class: 'fuga'} %>
+           	</div>
+        </div>
+        <div class="row">
+        	<%= f.text_area :body %>
+        </div>
+        <div class="row">
+        	<%= f.submit "投稿" %>
+        </div>
+	</div>
+	<% end %>
+</div>
