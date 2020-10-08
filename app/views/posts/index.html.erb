@@ -4,26 +4,8 @@
 		<% if user_signed_in? %>
 		<!-- ログイン後 -->
 			<div class="row sidebar__profile--edit pull-right" style="width: 50px;">
-				<% if current_user == @user %>
-					<%= link_to edit_user_path(current_user) do %>
-					 <i class="glyphicon glyphicon-wrench" aria-hidden="true" style="padding-left: 40px;color:green;"></i>
-					<% end %>
-				<% else %>
-	                  <% if current_user.following?(@user) %>
-	                    <%= form_for(current_user.relationships.find_by(follow_id: @user.id), html: { method: :delete }) do |f| %>
-	                      <%= hidden_field_tag :follow_id, @user.id %>
-	                      <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
-							<i class="fas fa-user-minus" style="color: #FF3300;"></i></i>
-						  <% end %>
-	                    <% end %>
-	                  <% else %>
-	                    <%= form_for(current_user.relationships.build) do |f| %>
-	                      <%= hidden_field_tag :follow_id, @user.id %>
-	                      <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
-							<i class="fas fa-user-plus" style="color: #66CCFF;"></i></i>
-						  <% end %>
-	                    <% end %>
-	                  <% end %>
+				<%= link_to edit_user_path(current_user) do %>
+				 <i class="glyphicon glyphicon-wrench" aria-hidden="true" style="padding-left: 40px;color:green;"></i>
 				<% end %>
 			</div>
 			<div class="row sidebar__profile">
@@ -34,7 +16,7 @@
 					<%= @user.name %>
 				</div>
 			</div>
-			<div class="row sidebar__profile--introduction">
+			<div class="row sidebar__profile--introduction" style="padding: 15px 0 0 30px;">
 				<%= @user.introduction %>
 			</div>
 			<div class="row sidebar__conquer"style="margin-top: 100px;">
@@ -43,7 +25,7 @@
 				<div class="col-xs-2 sidebar__conquer--foot">/47</div>
 			</div>
 			<div class="row sidebar__follow"style="width: 90%;margin: 10px auto;">
-				<%= link_to "フォロー一覧", user_follows_path(@user),class: "btn btn-info btn-block" %>
+				<%= link_to "フォロー一覧", "",class: "btn btn-info btn-block" %>
 			</div>
 			<div class="row sidebar__favorite"style="width: 90%;margin: 10px auto;">
 				<%= link_to "お気に入り一覧", "",class: "btn btn-warning btn-block" %>
@@ -58,18 +40,17 @@
 	</div>
 	<!-- ここまで -->
 	<div class="col-lg-8 col-lg-offset-1">
-		<!-- スライド -->
-		<div class="row"></div>
-		<!-- 投稿一覧 -->
 		<div class="row">
 			<% @posts.each do |post| %>
-			<div style="width: 350px;border: 1px solid black;margin: 20px 30px 10px 0;float: left">
+			<div style="border: 1px solid black;margin-bottom: 10px;">
 				<div class="row" style="margin: 15px 0 15px 30px;">
-					<%= attachment_image_tag @user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
+					<%= link_to user_path(post.user) do %>
+						<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
+					<% end %>
 					<p style="padding: 10px 0 0 80px;"><%= post.prefecure %></p>
 					<!-- いいね -->
 					<% if post.favorited_by?(current_user) %>
-	                    <%= link_to post_favorite_path(post), method: :delete do %>
+	                    <%= link_to post_favorites_path(post), method: :delete do %>
 	                      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
 	                      <%= post.favorites.count %>
 	                    <% end %>
@@ -79,29 +60,17 @@
 	                      <%= post.favorites.count %>
 	                    <% end %>
 	                <% end %>
-					<!-- ここまで -->
-					<!-- コメント -->
+	                <!-- コメント -->
 					<%= link_to post_path(post) do %>
 						<i class="fas fa-comment-alt"></i>
 						<%= post.comments.count %>
 					<% end %>
-					<!-- ここまで -->
 				</div>
 				<div class="row" style="margin-left: 30px;">
 					<%= link_to post_path(post) do %>
-						<%= attachment_image_tag post, :post_image, size: "290x200", format: 'jpeg' %>
+						<%= attachment_image_tag post, :post_image, size: "700x400", format: 'jpeg' %>
 					<% end %>
 				</div>
-				<!-- 編集、削除 -->
-				<div class="text-right">
-					<%= link_to edit_post_path do %>
-					  <i class="fas fa-cog"></i>
-					<% end %>
-					<%= link_to post_path(post),method: :delete do %>
-					  <i class="fas fa-trash-alt" style="margin: 10px 30px 10px 10px;"></i>
-					<% end %>
-				</div>
-				<!-- 内容 -->
 				<div class="row" style="margin: 15px 0 15px 30px;">
 					<%= post.body %>
 				</div>
