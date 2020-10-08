@@ -16,7 +16,7 @@
 					<%= @user.name %>
 				</div>
 			</div>
-			<div class="row sidebar__profile--introduction">
+			<div class="row sidebar__profile--introduction" style="padding: 15px 0 0 30px;">
 				<%= @user.introduction %>
 			</div>
 			<div class="row sidebar__conquer"style="margin-top: 100px;">
@@ -48,7 +48,9 @@
 					<p style="padding: 10px 0 0 80px;"><%= post.prefecure %></p>
 				</div>
 				<div class="row" style="margin-left: 30px;">
-					<%= attachment_image_tag post, :post_image, size: "700x400", format: 'jpeg' %>
+					<%= link_to post_path(post) do %>
+						<%= attachment_image_tag post, :post_image, size: "700x400", format: 'jpeg' %>
+					<% end %>
 				</div>
 				<div class="row" style="margin: 15px 0 15px 30px;">
 					<%= post.body %>

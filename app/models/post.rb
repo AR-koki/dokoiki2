@@ -8,8 +8,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   # カテゴリー
-  has_many :post_category_relations
-  has_many :categories, through: :post_category_relations
+  has_many :post_category_relations, dependent: :destroy
+  has_many :categories, through: :post_category_relations, dependent: :destroy
 
   enum category: {
     "---": 0,
@@ -17,8 +17,8 @@ class Post < ApplicationRecord
   }, _suffix: true
 
   # 都道府県
-  has_many :post_prefecure_relations
-  has_many :prefecures, through: :post_prefecure_relations
+  has_many :post_prefecure_relations, dependent: :destroy
+  has_many :prefecures, through: :post_prefecure_relations, dependent: :destroy
 
   enum prefecure: {
     "---": 0,
