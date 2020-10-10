@@ -1,0 +1,7 @@
+<!-- アーカイブ -->
+<div class="row"style="text-align: center;">投稿(月別)</div>
+<ul style="list-style:none;">
+   <% archives.each do |yyyymm, count| %>
+        <li><%= link_to ymconv(yyyymm, @user.posts.count.to_s), post_archive_path(post, yyyymm) %></li>
+   <% end %>
+</ul>

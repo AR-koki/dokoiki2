@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    @post = Post.find(params[:id])
     @posts = @user.posts
+    @archives = @post.divide_monthly
   end
 
   def edit
@@ -12,6 +14,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(user_params)
     redirect_to user_path(@user)
+  end
+
+  def archives
+    @user = User.find(params[:id])
+    @post = Post.find(params[:id])
+    @yyyymm = params[:yyyymm]
+    @posts = @user.posts.where("strftime('%Y%m', posts.created_at) = '"+@yyyymm+"'")
   end
 
   private

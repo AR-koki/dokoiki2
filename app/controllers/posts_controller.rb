@@ -7,11 +7,18 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @user = current_user
     @comment = Comment.new
+    @archives = @post.divide_monthly
   end
 
   def index
     @posts = Post.all
     @user = current_user
+    @recommendeds = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
+  end
+
+  def favorites
+    post_ids = current_user.favorites.pluck(:post_id)
+    @posts = Post.where(id: post_ids)
   end
 
   def create
@@ -36,6 +43,13 @@ class PostsController < ApplicationController
   	@post = Post.find(params[:id])
   	@post.destroy
   	redirect_to root_path
+  end
+
+  def archives
+    @user = User.find(params[:id])
+    @post = Post.find(params[:id])
+    @yyyymm = params[:yyyymm]
+    @posts = @user.posts.where("strftime('%Y%m', posts.created_at) = '"+@yyyymm+"'")
   end
 
   private

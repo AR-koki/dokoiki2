@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorite_posts, through: :favorites, source: :post
   has_many :comments, dependent: :destroy
   attachment :user_image, destroy: false
 
@@ -27,5 +28,12 @@ class User < ApplicationRecord
 
   def following?(other_user)
     followings.include?(other_user)
+  end
+
+  # 月別集計
+  def divide_monthly
+    @archives = user.posts.group("strftime('%Y%m', posts.created_at)")
+     .order("strftime('%Y%m', posts.created_at) desc")
+     .count
   end
 end
