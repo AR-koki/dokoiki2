@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   attachment :post_image, destroy: false
   # お気に入り
   has_many :favorites, dependent: :destroy
+  has_many :favorite_users, through: :favorites, source: :user
 
   # コメント
   has_many :comments, dependent: :destroy
@@ -32,8 +33,15 @@ class Post < ApplicationRecord
     福岡県: 40, 佐賀県: 41, 長崎県: 42, 熊本県: 43, 大分県: 44, 宮崎県: 45, 鹿児島県: 46,
     沖縄県: 47,
   }, _suffix: true
-
+  # お気に入り
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
+  end
+
+  # 月別集計
+  def divide_monthly
+    @archives = user.posts.group("strftime('%Y%m', posts.created_at)")
+     .order("strftime('%Y%m', posts.created_at) desc")
+     .count
   end
 end

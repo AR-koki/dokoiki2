@@ -1,41 +1,16 @@
 <div class="container">
 	<!-- サイドバー -->
 	<div class="col-lg-3 sidebar clearfix">
-		<% if user_signed_in? %>
-		<!-- ログイン後 -->
-			<div class="row sidebar__profile--edit pull-right" style="width: 50px;">
-				<%= link_to edit_user_path(current_user) do %>
-				 <i class="glyphicon glyphicon-wrench" aria-hidden="true" style="padding-left: 40px;color:green;"></i>
+	<%= render 'users/user', user: @user %>
+	<h2 class="text-center">ランキング</h2>
+		<% @recommendeds.each do |post| %>
+			<div class="pull-left" style="width: 200px;  margin-left: 10px;">
+				<p style="padding: 10px 0 0 80px;"><%= post.prefecure %></p>
+				<%= link_to post_path(post) do %>
+					<%= attachment_image_tag post, :post_image, :fill, 200, 130, format: 'jpeg' %>
+					<p style="margin-top: 20px;"></p>
 				<% end %>
 			</div>
-			<div class="row sidebar__profile">
-				<div class="col-xs-6 sidebar__profile--image" style="border-radius: 20px;">
-					<%= attachment_image_tag @user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'80x80', style: "border-radius: 50%;" %>
-				</div>
-				<div class="col-xs-6 sidebar__profile--name">
-					<%= @user.name %>
-				</div>
-			</div>
-			<div class="row sidebar__profile--introduction" style="padding: 15px 0 0 30px;">
-				<%= @user.introduction %>
-			</div>
-			<div class="row sidebar__conquer"style="margin-top: 100px;">
-				<div class="col-xs-4 sidebar__conquer--head">制覇数</div>
-				<div class="col-xs-6 sidebar__conquer--body"></div>
-				<div class="col-xs-2 sidebar__conquer--foot">/47</div>
-			</div>
-			<div class="row sidebar__follow"style="width: 90%;margin: 10px auto;">
-				<%= link_to "フォロー一覧", "",class: "btn btn-info btn-block" %>
-			</div>
-			<div class="row sidebar__favorite"style="width: 90%;margin: 10px auto;">
-				<%= link_to "お気に入り一覧", "",class: "btn btn-warning btn-block" %>
-			</div>
-			<div class="row"style="text-align: center;">投稿(月別)</div>
-		<!-- ここまで -->
-		<% else %>
-			<div class="row">おすすめスポット</div>
-			<div class="row">〇〇県</div>
-			<div class="row">写真</div>
 		<% end %>
 	</div>
 	<!-- ここまで -->
