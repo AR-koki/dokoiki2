@@ -33,8 +33,10 @@
 					<% end %>
 					<!-- ここまで -->
 				</div>
-				<div class="row" style="margin-left: 30px;">
-					<%= attachment_image_tag @post, :post_image, size: "700x400", format: 'jpeg' %>
+				<div class="row" style="margin: 30px;width: 700px;height: 400px;">
+					<% @post.post_images.each do |post_image| %>
+					<%= attachment_image_tag post_image, :post_image, size: "700x400", format: 'jpeg',style: "object-fit: contain;" %>
+					<% end %>
 				</div>
 				<div class="row" style="margin: 15px 0 15px 30px;">
 					<%= @post.body %>

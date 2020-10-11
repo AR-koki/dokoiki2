@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user, optional: true
-  attachment :post_image, destroy: false
+  has_many :post_images, dependent: :destroy
+  accepts_attachments_for :post_images, attachment: :post_image
   # お気に入り
   has_many :favorites, dependent: :destroy
   has_many :favorite_users, through: :favorites, source: :user

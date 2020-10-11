@@ -2,9 +2,9 @@
 	<%= form_with model:@post, local: true do |f| %>
 	<div class="col-lg-6">
 		<div class="item-image" style="margin-bottom: 30px;">
-            <%= attachment_image_tag @post, :post_image, fallback: "noimage.png", size:"300x300" %>
+
         </div>
-        <%= f.attachment_field :post_image %>
+        <%= f.attachment_field :post_images_post_images, multiple: true %>
 	</div>
 	<div class="col-lg-6">
 		<div class="row">

@@ -48,6 +48,7 @@ class PostsController < ApplicationController
   def archives
     @user = User.find(params[:id])
     @post = Post.find(params[:id])
+    @archives = @post.divide_monthly
     @yyyymm = params[:yyyymm]
     @posts = @user.posts.where("strftime('%Y%m', posts.created_at) = '"+@yyyymm+"'")
   end
@@ -55,6 +56,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body, :post_image, :user_id, :prefecure, :category)
+    params.require(:post).permit(:body, :user_id, :prefecure, :category, post_images_post_images: [])
   end
 end
