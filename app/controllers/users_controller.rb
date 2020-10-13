@@ -23,6 +23,16 @@ class UsersController < ApplicationController
     @posts = @user.posts.where("strftime('%Y%m', posts.created_at) = '"+@yyyymm+"'")
   end
 
+  def favorites
+    @user = User.find_by(id: params[:id])
+    @post = Post.find(params[:id])
+    @favorites = Favorite.where(user_id: @user.id)
+    @archives = @post.divide_monthly
+  end
+
+  def conquer
+  end
+
   private
 
   def user_params

@@ -3,6 +3,7 @@
 	<div class="col-lg-3 sidebar clearfix">
 	<%= render 'users/user', user: @user %>
 	<%= render 'users/archive', archives: @archives, post: @post %>
+	<%= @user.posts.prefecures{1}.count %>
 	</div>
 	<!-- ここまで -->
 	<div class="col-lg-8 col-lg-offset-1">
@@ -37,7 +38,7 @@
 				</div>
 				<div class="row" style="margin-left: 30px;">
 					<%= link_to post_path(post) do %>
-					<% @post.post_images.each do |post_image| %>
+					<% post.post_images.each do |post_image| %>
 						<%= attachment_image_tag post_image, :post_image, size: "290x200", format: 'jpeg' %>
 					<% end %>
 					<% end %>
