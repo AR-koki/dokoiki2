@@ -45,4 +45,8 @@ class Post < ApplicationRecord
      .order("strftime('%Y%m', posts.created_at) desc")
      .count
   end
+
+  def self.search(word)
+    @book = Post.where("body LIKE?","%#{word}%")
+  end
 end

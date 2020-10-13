@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
   get 'search' => 'searches#search'
+  get 'searched' => 'searches#searched'
   get '/users/:id/archives/:yyyymm', to: 'posts#archives', as: :post_archive
 end
