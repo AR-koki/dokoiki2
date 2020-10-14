@@ -3,7 +3,7 @@
     <h2>ログイン</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="row" style="margin-top: 20px;">
+      <div class="row" style="margin-top: 50px;">
         <div class="col-lg-2">E-mail</div>
         <div class="col-lg-8" style=""><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %></div>
       </div>
@@ -16,19 +16,18 @@
           <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
         </div>
       </div>
+      <div class="row" style="text-align: right; margin: 10px 200px 20px 0;">
+      <%= link_to "=>パスワードを忘れた方はこちら", new_user_password_path %>
+    </div>
 
-      <% if devise_mapping.rememberable? %>
-        <div class="field">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </div>
-      <% end %>
+    <div class="row" style="margin: 30px 0 50px 200px; width: 260px; border-radius: 10px;">
+        <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
+    </div>
 
-      <div class="actions">
-        <%= f.submit "Log in" %>
-      </div>
     <% end %>
 
-    <%= render "devise/shared/links" %>
+  <div class="row" style="padding-left: 290px;">
+      新規登録は
+      <%= link_to "こちら", new_user_registration_path %>
   </div>
 </div>

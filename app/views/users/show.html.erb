@@ -3,7 +3,6 @@
 	<div class="col-lg-3 sidebar clearfix">
 	<%= render 'users/user', user: @user %>
 	<%= render 'users/archive', archives: @archives, post: @post %>
-	<%= @user.posts.prefecures{1}.count %>
 	</div>
 	<!-- ここまで -->
 	<div class="col-lg-8 col-lg-offset-1">

@@ -1,30 +1,43 @@
 <div class="container">
 	<%= form_with model:@post, local: true do |f| %>
-	<div class="col-lg-6">
+	<div class="col-lg-5 col-lg-offset-2">
 		<div class="item-image" style="margin-bottom: 30px;">
-
+            <% @post.post_images.each do |post_image| %>
+                <%= attachment_image_tag @post_image, :post_image, :fill, 200, 130, format: 'jpeg', class: "image" %>
+            <% end %>
         </div>
         <%= f.attachment_field :post_images_post_images, multiple: true %>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-lg-5" style="margin-top: 50px;">
 		<div class="row">
 			<div class="col-xs-3">都道府県<br>(撮影場所)</div>
 			<div class="col-xs-9">
             	<%= f.select :prefecure, Post.prefecures.keys, {}, {class: 'hoge'} %>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-top: 30px;">
         	<div class="col-xs-3">カテゴリー</div>
         	<div class="col-xs-9">
            		<%= f.select :category, Post.categories.keys, {}, {class: 'fuga'} %>
            	</div>
         </div>
-        <div class="row">
-        	<%= f.text_area :body %>
+        <div class="row" style="margin-top: 30px;">
+        	<%= f.text_area :body ,size: "40x7" %>
         </div>
         <div class="row">
         	<%= f.submit "投稿" %>
         </div>
 	</div>
 	<% end %>
+    <script>
+            $(document).on('turbolinks:load', function() {
+                $('#item_image').on('change', function (e) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(".image").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files[0]);
+            });
+            });
+        </script>
 </div>

@@ -47,6 +47,6 @@ class Post < ApplicationRecord
   end
 
   def self.search(word)
-    @book = Post.where("body LIKE?","%#{word}%")
+    @post = Post.where("body LIKE?","%#{word}%")
   end
 end
