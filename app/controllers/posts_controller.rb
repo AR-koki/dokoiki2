@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @user = current_user
-    @recommendeds = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
+    @recommendeds = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
   end
 
   # def favorites
