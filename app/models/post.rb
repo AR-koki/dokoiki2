@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user, optional: true
-  attachment :post_image, destroy: false
+  has_many :post_images, dependent: :destroy
+  accepts_attachments_for :post_images, attachment: :post_image
   # お気に入り
   has_many :favorites, dependent: :destroy
   has_many :favorite_users, through: :favorites, source: :user
@@ -43,5 +44,9 @@ class Post < ApplicationRecord
     @archives = user.posts.group("strftime('%Y%m', posts.created_at)")
      .order("strftime('%Y%m', posts.created_at) desc")
      .count
+  end
+
+  def self.search(word)
+    @post = Post.where("body LIKE?","%#{word}%")
   end
 end

@@ -1,0 +1,362 @@
+<div class="container">
+	<div class="row">いったとこ</div>
+	<div class="row">
+		<div id="map-container"></div>
+	</div>
+</div>
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<%= javascript_include_tag 'jquery.japan-map.min.js' %>
+ <script type="text/javascript">
+$(function(){
+
+    var areas = [
+        {	<% if Post.exists?(user_id: @user.id, prefecure: 1) %>
+        		code : 1, name: "北海道", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [1]
+        	<% else %>
+	        	code : 1, name: "北海道", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [1]
+	        <% end %>
+    	},
+	    {
+	    	<% if Post.exists?(user_id: @user.id, prefecure: 2) %>
+	    		code : 2, name: "青森", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [2]
+    		<% else %>
+        		code : 2, name: "青森", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [2]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 3) %>
+	    		code : 3, name: "岩手", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [3]
+    		<% else %>
+        		code : 3, name: "岩手", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [3]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 4) %>
+	    		code : 4, name: "宮城", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [4]
+    		<% else %>
+        		code : 4, name: "宮城", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [4]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 5) %>
+	    		code : 5, name: "秋田", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [5]
+    		<% else %>
+        		code : 5, name: "秋田", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [5]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 6) %>
+	    		code : 6, name: "山形", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [6]
+    		<% else %>
+        		code : 6, name: "山形", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [6]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 7) %>
+	    		code : 7, name: "福島", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [7]
+    		<% else %>
+        		code : 7, name: "福島", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [7]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 8) %>
+	    		code : 8, name: "茨城", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [8]
+    		<% else %>
+        		code : 8, name: "茨城", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [8]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 9) %>
+	    		code : 9, name: "栃木", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [9]
+    		<% else %>
+        		code : 9, name: "栃木", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [9]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 10) %>
+	    		code : 10, name: "群馬", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [10]
+    		<% else %>
+        		code : 10, name: "群馬", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [10]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 11) %>
+	    		code : 11, name: "埼玉", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [11]
+    		<% else %>
+        		code : 11, name: "埼玉", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [11]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 12) %>
+	    		code : 12, name: "千葉", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [12]
+    		<% else %>
+        		code : 12, name: "千葉", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [12]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 13) %>
+	    		code : 13, name: "東京", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [13]
+    		<% else %>
+        		code : 13, name: "東京", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [13]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 14) %>
+	    		code : 14, name: "神奈川", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [14]
+    		<% else %>
+        		code : 14, name: "神奈川", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [14]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 15) %>
+	    		code : 15, name: "新潟", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [15]
+    		<% else %>
+        		code : 15, name: "新潟", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [15]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 16) %>
+	    		code : 16, name: "富山", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [16]
+    		<% else %>
+        		code : 16, name: "富山", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [16]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 17) %>
+	    		code : 17, name: "石川", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [17]
+    		<% else %>
+        		code : 17, name: "石川", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [17]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 18) %>
+	    		code : 18, name: "福井", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [18]
+    		<% else %>
+        		code : 18, name: "福井", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [18]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 19) %>
+	    		code : 19, name: "山梨", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [19]
+    		<% else %>
+        		code : 19, name: "山梨", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [19]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 20) %>
+	    		code : 20, name: "長野", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [20]
+    		<% else %>
+        		code : 20, name: "長野", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [20]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 21) %>
+	    		code : 21, name: "岐阜", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [21]
+    		<% else %>
+        		code : 21, name: "岐阜", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [21]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 22) %>
+	    		code : 22, name: "静岡", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [22]
+    		<% else %>
+        		code : 22, name: "静岡", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [22]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 23) %>
+	    		code : 23, name: "愛知", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [23]
+    		<% else %>
+        		code : 23, name: "愛知", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [23]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 24) %>
+	    		code : 24, name: "三重", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [24]
+    		<% else %>
+        		code : 24, name: "三重", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [24]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 25) %>
+	    		code : 25, name: "滋賀", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [25]
+    		<% else %>
+        		code : 25, name: "滋賀", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [25]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 26) %>
+	    		code : 26, name: "京都", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [26]
+    		<% else %>
+        		code : 26, name: "京都", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [26]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 27) %>
+	    		code : 27, name: "大阪", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [27]
+    		<% else %>
+        		code : 27, name: "大阪", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [27]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 28) %>
+	    		code : 28, name: "兵庫", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [28]
+    		<% else %>
+        		code : 28, name: "兵庫", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [28]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 29) %>
+	    		code : 29, name: "奈良", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [29]
+    		<% else %>
+        		code : 29, name: "奈良", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [29]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 30) %>
+	    		code : 30, name: "和歌山", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [30]
+    		<% else %>
+        		code : 30, name: "和歌山", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [30]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 31) %>
+	    		code : 31, name: "鳥取", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [31]
+    		<% else %>
+        		code : 31, name: "鳥取", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [31]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 32) %>
+	    		code : 32, name: "島根", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [32]
+    		<% else %>
+        		code : 32, name: "島根", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [32]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 33) %>
+	    		code : 33, name: "岡山", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [33]
+    		<% else %>
+        		code : 33, name: "岡山", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [33]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 34) %>
+	    		code : 34, name: "広島", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [34]
+    		<% else %>
+        		code : 34, name: "広島", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [34]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 35) %>
+	    		code : 35, name: "山口", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [35]
+    		<% else %>
+        		code : 35, name: "山口", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [35]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 36) %>
+	    		code : 36, name: "徳島", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [36]
+    		<% else %>
+        		code : 36, name: "徳島", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [36]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 37) %>
+	    		code : 37, name: "香川", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [37]
+    		<% else %>
+        		code : 37, name: "香川", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [37]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 38) %>
+	    		code : 38, name: "愛知", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [38]
+    		<% else %>
+        		code : 38, name: "愛知", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [38]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 39) %>
+	    		code : 39, name: "高知", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [39]
+    		<% else %>
+        		code : 39, name: "高知", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [39]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 40) %>
+	    		code : 40, name: "福岡", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [40]
+    		<% else %>
+        		code : 40, name: "福岡", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [40]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 41) %>
+	    		code : 41, name: "佐賀", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [41]
+    		<% else %>
+        		code : 41, name: "佐賀", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [41]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 42) %>
+	    		code : 42, name: "長崎", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [42]
+    		<% else %>
+        		code : 42, name: "長崎", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [42]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 43) %>
+	    		code : 43, name: "熊本", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [43]
+    		<% else %>
+        		code : 43, name: "熊本", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [43]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 44) %>
+	    		code : 44, name: "大分", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [44]
+    		<% else %>
+        		code : 44, name: "大分", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [44]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 45) %>
+	    		code : 45, name: "宮城", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [45]
+    		<% else %>
+        		code : 45, name: "宮城", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [45]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 46) %>
+	    		code : 46, name: "鹿児島", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [46]
+    		<% else %>
+        		code : 46, name: "鹿児島", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [46]
+        	<% end %>
+	    },
+	    {
+	    	<% if Post.exists?(user_id: @user.id,prefecure: 47) %>
+	    		code : 47, name: "沖縄", color: "#7CEA9C", hoverColor: "#7CEA9C", prefectures: [47]
+    		<% else %>
+        		code : 47, name: "沖縄", color: "#a0a0a0", hoverColor: "#7CEA9C", prefectures: [47]
+        	<% end %>
+	    },
+    ];
+
+    $("#map-container").japanMap(
+        {
+            areas  : areas,
+            selection : "prefecture",
+            borderLineWidth: 0.25,
+            drawsBoxLine : false,
+            movesIslands : true,
+            showsAreaName : true,
+            width: 800,
+            font : "MS Mincho",
+            fontSize : 12,
+            fontColor : "areaColor",
+            fontShadowColor : "black",
+            onSelect:function(data){
+                alert(data.name);
+            },
+        }
+    );
+});
+</script>
