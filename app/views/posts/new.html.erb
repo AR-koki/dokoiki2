@@ -1,7 +1,7 @@
 <div class="container">
 	<%= form_with model:@post, local: true do |f| %>
 	<div class="col-lg-5 col-lg-offset-2">
-		<div class="item-image" style="margin-bottom: 30px;">
+		<div class="post-images_post-images" style="margin-bottom: 30px;">
             <% @post.post_images.each do |post_image| %>
                 <%= attachment_image_tag @post_image, :post_image, :fill, 200, 130, format: 'jpeg', class: "image" %>
             <% end %>
@@ -29,15 +29,15 @@
         </div>
 	</div>
 	<% end %>
-    <script>
-            $(document).on('turbolinks:load', function() {
-                $('#item_image').on('change', function (e) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $(".image").attr('src', e.target.result);
-                }
-                reader.readAsDataURL(e.target.files[0]);
-            });
-            });
-        </script>
 </div>
+<script>
+    $(document).on('turbolinks:load', function() {
+        $('#post_post_images_post_images').on('change', function (e) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(".post-images_post-images").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    });
+    });
+</script>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
   end
   get "users/:id/favorites" => "users#favorites", as: :favorites_all
+  get "users/:id/conquer" => "users#conquer", as: :conquer
   resources :users, only: [:show, :edit, :update] do
     get 'follows' => 'relationships#follower', as: 'follows'
     get 'followers' => 'relationships#followed', as: 'followers'
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
   get 'search' => 'searches#search'
-  get 'searched' => 'searches#searched'
+  get 'category_searched' => 'searches#category_searched'
+  get 'word_searched' => 'searches#word_searched'
+  get 'map_searched/:id' => 'searches#map_searched'
   get '/users/:id/archives/:yyyymm', to: 'posts#archives', as: :post_archive
 end
