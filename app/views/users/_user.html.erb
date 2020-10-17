@@ -5,7 +5,7 @@
 			<!-- 編集、フォロー -->
 			<% if current_user == user %>
 				<%= link_to edit_user_path(user) do %>
-				 <i class="glyphicon glyphicon-wrench" aria-hidden="true" style="padding-left: 40px;color:green;"></i>
+				 <i class="glyphicon glyphicon-wrench" aria-hidden="true" style="padding-left: 25px;color:green;"></i>
 				<% end %>
 			<% else %>
                   <% if current_user.following?(user) %>

@@ -1,0 +1,19 @@
+<%= link_to post_path(post) do %>
+	<% if post.post_images.count == 1  %>
+		<% post.post_images.each do |post_image| %>
+			<%= attachment_image_tag post_image, :post_image, size: "220x148", format: 'jpeg',style: "object-fit: contain;border: 1px solid #dcdcdc;margin-top: 5px;" %>
+		<% end %>
+	<% elsif post.post_images.count == 2 %>
+		<% post.post_images.each do |post_image| %>
+			<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin: 50px 0 33px 0;border: 1px solid #dcdcdc;" %>
+		<% end %>
+	<% elsif post.post_images.count == 3 %>
+		<% post.post_images.each do |post_image| %>
+			<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
+		<% end %>
+	<% else  %>
+		<% post.post_images.each do |post_image| %>
+			<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
+		<% end %>
+	<% end %>
+<% end %>
