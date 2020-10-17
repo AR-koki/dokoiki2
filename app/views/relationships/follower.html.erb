@@ -1,0 +1,51 @@
+<div class=container>
+  <h2>フォローユーザー</h2>
+  <div class="row" style="margin-top: 50px;">
+    <% if @users.count > 0 %>
+      <div class="col-xs-10 col-xs-offset-1">
+        <table class="table table-hover table-inverse">
+          <tr class="active">
+            <td></td>
+            <td>Name</td>
+            <td>Posts</td>
+            <td>Follow</td>
+            <td></td>
+          </tr>
+        	<% @users.each do |user| %>
+            <tr>
+              <td>
+                <%= link_to user_path(user) do %>
+                  <%= attachment_image_tag user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
+                <% end %>
+              </td>
+              <td><%= user.name %></td>
+              <td><%= user.posts.count %></td>
+              <td><%= user.followings.count %></td>
+              <td>
+                <% unless current_user == user %>
+                  <% if current_user.following?(user) %>
+                            <%= form_for(current_user.relationships.find_by(follow_id: user.id), html: { method: :delete }) do |f| %>
+                              <%= hidden_field_tag :follow_id, user.id %>
+                              <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+                    <i class="fas fa-user-minus" style="color: #FF3300;"></i></i>
+                    <% end %>
+                            <% end %>
+                          <% else %>
+                            <%= form_for(current_user.relationships.build) do |f| %>
+                              <%= hidden_field_tag :follow_id, user.id %>
+                              <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+                    <i class="fas fa-user-plus" style="color: #66CCFF;"></i></i>
+                    <% end %>
+                            <% end %>
+                          <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <% else %>
+      <p>ユーザーはいません</p>
+    <% end %>
+  </div>
+</div>

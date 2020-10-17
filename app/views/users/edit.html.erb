@@ -1,0 +1,39 @@
+<div class="container">
+	<div class="col-lg-6 col-lg-offset-3" style="margin-top: 50px;">
+		<h2>プロフィール編集</h2>
+		<%= form_with model:@user, local: true do |f| %>
+			<div style="margin-top: 50px;">
+				<div class="col-xs-4">
+					<div class="user-image" style="margin-bottom: 30px;">
+	                    <%= attachment_image_tag @user, :user_image, :fill, 300, 300, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'300x300', style: "border-radius: 50%;margin-bottom: 30px;" %>
+	                </div>
+					<%= f.attachment_field :user_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+				</div>
+				<div class="col-xs-4 col-xs-offset-4" style="margin-top: 20px;">
+					<div class="row">
+						<p>名前</p>
+						<%= f.text_field :name %>
+					</div>
+					<div class="row" style="margin-top: 20px;">
+						<p>自己紹介</p>
+						<%= f.text_area :introduction %>
+					</div>
+					<div class="row" style="margin-top: 20px;">
+						<%= f.submit "編集を保存" %>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
+<script>
+    $(document).on('turbolinks:load', function() {
+        $('#user_user_image').on('change', function (e) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(".user_image").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    });
+    });
+</script>

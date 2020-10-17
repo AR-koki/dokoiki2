@@ -1,0 +1,51 @@
+
+	<% if user_signed_in? %>
+	<!-- ログイン後 -->
+		<div class="row sidebar__profile--edit pull-right" style="width: 50px;">
+			<!-- 編集、フォロー -->
+			<% if current_user == user %>
+				<%= link_to edit_user_path(user) do %>
+				 <i class="glyphicon glyphicon-wrench" aria-hidden="true" style="padding-left: 25px;color:green;"></i>
+				<% end %>
+			<% else %>
+                  <% if current_user.following?(user) %>
+                    <%= form_for(current_user.relationships.find_by(follow_id: user.id), html: { method: :delete }) do |f| %>
+                      <%= hidden_field_tag :follow_id, user.id %>
+                      <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+						<i class="fas fa-user-minus" style="color: #FF3300;"></i>
+					  <% end %>
+                    <% end %>
+                  <% else %>
+                    <%= form_for(current_user.relationships.build) do |f| %>
+                      <%= hidden_field_tag :follow_id, user.id %>
+                      <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+						<i class="fas fa-user-plus" style="color: #66CCFF;"></i>
+					  <% end %>
+                    <% end %>
+                  <% end %>
+			<% end %>
+			<!-- ここまで -->
+		</div>
+		<div class="row sidebar__profile">
+			<div class="col-xs-6 sidebar__profile--image" style="border-radius: 20px;">
+				<%= attachment_image_tag user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'80x80', style: "border-radius: 50%;" %>
+			</div>
+			<div class="col-xs-6 sidebar__profile--name">
+				<%= user.name %>
+			</div>
+		</div>
+		<div class="row sidebar__profile--introduction"style="height: 150px;">
+			<%= user.introduction %>
+		</div>
+		<div class="row sidebar__follow"style="width: 90%;margin: 10px auto;">
+			<%= link_to "フォロー一覧", user_follows_path(user),class: "btn btn-info btn-block" %>
+		</div>
+		<div class="row sidebar__favorite"style="width: 90%;margin: 10px auto;">
+			<%= link_to "お気に入り一覧", favorites_all_path(user),class: "btn btn-warning btn-block" %>
+		</div>
+	<!-- ここまで -->
+	<% else %>
+		<div class="row">おすすめスポット</div>
+		<div class="row">〇〇県</div>
+		<div class="row">写真</div>
+	<% end %>

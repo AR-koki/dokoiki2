@@ -1,0 +1,42 @@
+<div class="container">
+	<!-- サイドバー -->
+	<div class="col-lg-3 sidebar clearfix">
+		<h2 class="text-center">ランキング</h2>
+		<% @recommendeds.each do |post| %>
+			<div class="pull-left" style="width: 200px;  margin-left: 10px;">
+				<p style="padding: 10px 0 0 80px;"><%= post.prefecure %></p>
+				<%= link_to post_path(post) do %>
+				<% post.post_images.each do |post_image| %>
+					<%= attachment_image_tag post_image, :post_image, :fill, 200, 130, format: 'jpeg' %>
+				<% end %>
+					<p style="margin-top: 20px;"></p>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+	<!-- ここまで -->
+	<div class="col-lg-8 col-lg-offset-1">
+		<div class="row">
+			<% @posts.each do |post| %>
+			<div style="border: 1px solid black;margin-bottom: 10px;">
+				<div class="row" style="margin: 15px 0 15px 30px;">
+					<%= link_to user_path(post.user) do %>
+						<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
+					<% end %>
+					<p style="padding: 10px 0 0 80px;"><%= post.prefecure %></p>
+				</div>
+				<div class="row" style="margin-left: 30px;">
+					<%= link_to post_path(post) do %>
+					<% post.post_images.each do |post_image| %>
+						<%= attachment_image_tag post_image, :post_image, size: "700x400", format: 'jpeg' %>
+					<% end %>
+					<% end %>
+				</div>
+				<div class="row" style="margin: 15px 0 15px 30px;">
+					<%= post.body %>
+				</div>
+			</div>
+			<% end %>
+		</div>
+	<div>
+</div>
