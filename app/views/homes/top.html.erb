@@ -1,39 +1,41 @@
 <div class="container">
 	<!-- サイドバー -->
-	<div class="col-lg-3 sidebar clearfix">
+	<div class="col-lg-3 sidebar clearfix"style="margin-bottom: 30px;width: 285px;height:660px;overflow:auto;">
 		<h2 class="text-center">ランキング</h2>
-		<% @recommendeds.each do |post| %>
-			<div class="pull-left" style="width: 200px;  margin-left: 10px;">
-				<p style="padding: 10px 0 0 80px;"><%= post.prefecure %></p>
-				<%= link_to post_path(post) do %>
-				<% post.post_images.each do |post_image| %>
-					<%= attachment_image_tag post_image, :post_image, :fill, 200, 130, format: 'jpeg' %>
-				<% end %>
-					<p style="margin-top: 20px;"></p>
-				<% end %>
-			</div>
-		<% end %>
+		<%= render 'posts/ranking', recommendeds: @recommendeds %>
 	</div>
 	<!-- ここまで -->
-	<div class="col-lg-8 col-lg-offset-1">
+	<div class="col-lg-8 col-lg-offset-1"style="width: 760px;height:660px;overflow:auto;">
 		<div class="row">
 			<% @posts.each do |post| %>
-			<div style="border: 1px solid black;margin-bottom: 10px;">
-				<div class="row" style="margin: 15px 0 15px 30px;">
-					<%= link_to user_path(post.user) do %>
-						<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
-					<% end %>
-					<p style="padding: 10px 0 0 80px;"><%= post.prefecure %></p>
+			<div style="width: 240px;height: 290px;border: 1px solid black;margin: 10px 10px 10px 0;float: left;">
+				<div class="row" style="margin: 10px 0 15px 10px;">
+					<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
+					<p style="padding: 10px 0 0 40px;float: left"><%= post.prefecure %></p>
 				</div>
-				<div class="row" style="margin-left: 30px;">
+				<div class="row" style="margin-left: 10px;">
 					<%= link_to post_path(post) do %>
-					<% post.post_images.each do |post_image| %>
-						<%= attachment_image_tag post_image, :post_image, size: "700x400", format: 'jpeg' %>
-					<% end %>
+						<% if post.post_images.count == 1  %>
+							<% post.post_images.each do |post_image| %>
+								<%= attachment_image_tag post_image, :post_image, size: "220x148", format: 'jpeg',style: "object-fit: contain;border: 1px solid #dcdcdc;margin-top: 5px;" %>
+							<% end %>
+						<% elsif post.post_images.count == 2 %>
+							<% post.post_images.each do |post_image| %>
+								<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin: 50px 0 33px 0;border: 1px solid #dcdcdc;" %>
+							<% end %>
+						<% elsif post.post_images.count == 3 %>
+							<% post.post_images.each do |post_image| %>
+								<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
+							<% end %>
+						<% else  %>
+							<% post.post_images.each do |post_image| %>
+								<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
+							<% end %>
+						<% end %>
 					<% end %>
 				</div>
-				<div class="row" style="margin: 15px 0 15px 30px;">
-					<%= post.body %>
+				<div class="row" style="margin: 20px 0 15px 20px;">
+					<%= post.body.truncate(35) %>
 				</div>
 			</div>
 			<% end %>
