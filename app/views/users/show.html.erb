@@ -53,12 +53,12 @@
 					<div style="margin: 10px 0 0 40px;float: left">
 						<% if post.favorited_by?(current_user) %>
 		                    <%= link_to post_favorites_path(post), method: :delete do %>
-		                      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+		                      <i class="fas fa-star" aria-hidden="true" style="color: #FFCC00;"></i>
 		                      <%= post.favorites.count %>
 		                    <% end %>
 		                <% else %>
 		                    <%= link_to post_favorites_path(post), method: :post do %>
-		                      <i class="far fa-heart" aria-hidden="true"></i>
+		                      <i class="far fa-star" aria-hidden="true"></i>
 		                      <%= post.favorites.count %>
 		                    <% end %>
 		                <% end %>
@@ -93,14 +93,18 @@
 					<% end %>
 				</div>
 				<!-- 編集、削除 -->
-				<div class="text-right">
-					<%= link_to edit_post_path(post) do %>
-					  <i class="fas fa-cog"></i>
-					<% end %>
-					<%= link_to post_path(post),method: :delete do %>
-					  <i class="fas fa-trash-alt" style="margin: 20px 30px 0 10px; "></i>
-					<% end %>
-				</div>
+				<% if @post.user_id == current_user.id %>
+					<div class="text-right">
+						<%= link_to edit_post_path(post) do %>
+						  <i class="fas fa-cog"></i>
+						<% end %>
+						<%= link_to post_path(post),method: :delete do %>
+						  <i class="fas fa-trash-alt" style="margin: 20px 30px 0 10px; "></i>
+						<% end %>
+					</div>
+				<% else %>
+					<div class="row" style="margin: 20px 30px 0 10px;"></div>
+				<% end %>
 				<!-- 内容 -->
 				<div class="row" style="margin: 10px 0 15px 20px;">
 					<%= post.body.truncate(35) %>

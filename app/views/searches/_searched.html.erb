@@ -1,19 +1,10 @@
 <div class="container">
-	<!-- サイドバー -->
-	<div class="col-lg-3 sidebar clearfix"style="margin-bottom: 30px;width: 285px;height:660px;overflow:auto;">
-	<%= render 'users/user', user: @user %>
-	<h2 class="text-center">ランキング</h2>
-		<%= render 'posts/ranking', recommendeds: @recommendeds %>
-	</div>
-	<!-- ここまで -->
-	<div class="col-lg-8 col-lg-offset-1"style="width: 760px;height:660px;overflow:auto;">
-		<div class="row">
+	<div class="row">'<%= word %>'の検索結果</div>
+	<div class="row" style="margin-left: 30px;">
 			<% @posts.each do |post| %>
-			<div style="width: 240px;height: 290px;border: 1px solid black;margin: 10px 10px 10px 0;float: left;">
+			<div style="width: 240px;height: 260px;border: 1px solid black;margin: 10px 10px 10px 0;float: left;">
 				<div class="row" style="margin: 10px 0 15px 10px;">
-					<%= link_to user_path(post.user) do %>
-						<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
-					<% end %>
+					<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
 					<p style="padding: 10px 0 0 40px;float: left"><%= post.prefecure %></p>
 					<!-- いいね -->
 					<div style="margin: 10px 0 0 40px;float: left">
@@ -58,11 +49,11 @@
 						<% end %>
 					<% end %>
 				</div>
-				<div class="row" style="margin: 20px 0 15px 20px;">
+				<!-- 内容 -->
+				<div class="row" style="margin: 10px 0 15px 20px;">
 					<%= post.body.truncate(35) %>
 				</div>
 			</div>
 			<% end %>
 		</div>
-	<div>
 </div>

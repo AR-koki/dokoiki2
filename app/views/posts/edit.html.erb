@@ -1,14 +1,33 @@
 <div class="container">
     <h2>投稿編集</h2>
     <div class="row">
+        <div id="image-box-1">
+          <div class="item-num-0" id="image-box__container"></div>
+        </div>
     	<%= form_with model:@post, local: true do |f| %>
     	<div class="col-lg-6">
-    		<div class="item-image" style="margin-bottom: 30px;">
-                <% @post.post_images.each do |post_image| %>
-                    <%= attachment_image_tag @post_image, :post_image, fallback: "noimage.png", size:"400x300" %>
+    		<div class="row item-image" style="width: 500px;height: 450px;margin: 10px 10px 10px 0;float: left;">
+                <% if @post.post_images.count == 1  %>
+                    <% @post.post_images.each do |post_image| %>
+                        <%= attachment_image_tag post_image, :post_image, size: "480x400", format: 'jpeg',style: "object-fit: contain;border: 1px solid #dcdcdc;margin-top: 5px;" %>
+                    <% end %>
+                <% elsif @post.post_images.count == 2 %>
+                    <% @post.post_images.each do |post_image| %>
+                        <%= attachment_image_tag post_image, :post_image, size: "245x380", format: 'jpeg',style: "object-fit: contain;margin: 50px 0 33px 0;border: 1px solid #dcdcdc;" %>
+                    <% end %>
+                <% elsif @post.post_images.count == 3 %>
+                    <% @post.post_images.each do |post_image| %>
+                        <%= attachment_image_tag post_image, :post_image, size: "245x220", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
+                    <% end %>
+                <% else  %>
+                    <% @post.post_images.each do |post_image| %>
+                        <%= attachment_image_tag post_image, :post_image, size: "245x220", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
+                    <% end %>
                 <% end %>
             </div>
-            <%= f.attachment_field :post_images_post_images, multiple: true %>
+            <div class="row">
+                <%= f.attachment_field :post_images_post_images, multiple: true %>
+            </div>
     	</div>
     	<div class="col-lg-6">
     		<div class="row" style="margin-top: 50px;">
@@ -33,3 +52,14 @@
     	<% end %>
     </div>
 </div>
+<script>
+    $(document).on('turbolinks:load', function() {
+        $('#post_post_images_post_images').on('change', function (e) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(".post_image").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    });
+    });
+</script>

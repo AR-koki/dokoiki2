@@ -1,38 +1,39 @@
 <div class="container">
 	<div class="row">地図から検索</div>
-	<div id="map-container"></div>
+	<div id="map-container" style="margin-left: 50px;"></div>
 	<div class="row"></div>
 	<div class="row">カテゴリーから検索</div>
-	<div class="row">
+	<div class="row" style="margin: 20px 0 20px 30px;">
 		<%= form_with url: category_searched_path, method: :get, local: true do |f| %>
 			<%= f.hidden_field :id, :value => 1 %>
 			<%= f.submit Post.categories.key(1),style: "float: left;" %>
 		<% end %>
 		<%= form_with url: category_searched_path, method: :get, local: true do |f| %>
 			<%= f.hidden_field :id, :value => 2 %>
-			<%= f.submit Post.categories.key(2),style: "float: left;" %>
+			<%= f.submit Post.categories.key(2),style: "float: left;margin-left: 10px;" %>
 		<% end %>
 		<%= form_with url: category_searched_path, method: :get, local: true do |f| %>
 			<%= f.hidden_field :id, :value => 3 %>
-			<%= f.submit Post.categories.key(3),style: "float: left;" %>
+			<%= f.submit Post.categories.key(3),style: "float: left;margin-left: 10px;" %>
 		<% end %>
 		<%= form_with url: category_searched_path, method: :get, local: true do |f| %>
 			<%= f.hidden_field :id, :value => 4 %>
-			<%= f.submit Post.categories.key(4),style: "float: left;" %>
+			<%= f.submit Post.categories.key(4),style: "float: left;margin-left: 10px;" %>
 		<% end %>
 		<%= form_with url: category_searched_path, method: :get, local: true do |f| %>
 			<%= f.hidden_field :id, :value => 5 %>
-			<%= f.submit Post.categories.key(5),style: "float: left;" %>
+			<%= f.submit Post.categories.key(5),style: "float: left;margin-left: 10px;" %>
 		<% end %>
 	</div>
 	<div class="row">ワードから検索</div>
+	<div class="row" style="margin: 10px 0 20px 30px;">
 		<%= form_with url: word_searched_path, method: :get, local: true do |f| %>
 		<%= f.text_field :word %>
 		<%= button_tag :type => "submit" do %>
             <i class="fa fa-search"></i>
           <% end %>
 		<% end %>
-	<div class="row"></div>
+	</div>
 </div>
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <%= javascript_include_tag 'jquery.japan-map.min.js' %>
