@@ -52,14 +52,3 @@
     	<% end %>
     </div>
 </div>
-<script>
-    $(document).on('turbolinks:load', function() {
-        $('#post_post_images_post_images').on('change', function (e) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $(".post_image").attr('src', e.target.result);
-        }
-        reader.readAsDataURL(e.target.files[0]);
-    });
-    });
-</script>
