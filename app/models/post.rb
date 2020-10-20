@@ -49,4 +49,9 @@ class Post < ApplicationRecord
   def self.search(word)
     @post = Post.where("body LIKE?","%#{word}%")
   end
+  # バリデーション
+  validates :body, presence: true
+  validates :body, length: { maximum: 200 }
+  validates :category, inclusion: { in: Post.categories.keys }
+  validates :prefecure, inclusion: { in: Post.prefecures.keys }
 end

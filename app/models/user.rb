@@ -36,4 +36,10 @@ class User < ApplicationRecord
      .order("strftime(Arel.sql('%Y%m', posts.created_at)) desc")
      .count
   end
+
+  # バリデーション
+  validates :name, presence: true
+  validates :name, length: { minimum: 2 }
+  validates :name, length: { maximum: 20 }
+  validates :introduction, length: { maximum: 50 }
 end

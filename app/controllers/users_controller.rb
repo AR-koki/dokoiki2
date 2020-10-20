@@ -298,14 +298,18 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user)
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: "プロフィールを更新"
+    else
+      render 'users/edit'
+    end
   end
 
   def archives
     @user = User.find(params[:id])
     @post = Post.find(params[:id])
     @yyyymm = params[:yyyymm]
+    @archives = @post.divide_monthly
     @posts = @user.posts.where("strftime('%Y%m', posts.created_at) = '"+@yyyymm+"'")
   end
 

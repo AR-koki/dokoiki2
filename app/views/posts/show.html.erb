@@ -2,35 +2,42 @@
 	<!-- サイドバー -->
 	<div class="col-lg-3 sidebar">
 	<%= render 'users/user', user: @user %>
-	<%= render 'users/archive', archives: @archives, post: @post %>
+	<%= render 'users/archive', archives: @archives, post: @post, user: @user %>
 	</div>
 	<!-- ここまで -->
 	<div class="col-lg-8 col-lg-offset-1"style="width: 900px;height:700px;overflow:auto;">
-		<div class="row">
-			<div style="width:780px;border: 1px solid #edb2c4;margin-bottom: 10px;background-color: #ffffff">
+		<div class="flash">
+	  		<% if flash[:notice] %>
+	  			<p><i class="far fa-check-square"></i><%= flash[:notice] %></p>
+	  		<% end %>
+	  	</div>
+		<div class="row"style="width:780px;">
+			<div style="border: 1px solid #edb2c4;margin-bottom: 10px;background-color: #ffffff">
 				<div class="row" style="margin: 15px 0 15px 30px;">
 					<%= link_to user_path(@post.user) do %>
 						<%= attachment_image_tag @post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
 					<% end %>
-					<p style="padding: 10px 0 0 80px;"><%= @post.prefecure %></p>
+					<p style="padding: 10px 0 0 150px;float: left;"><%= @post.prefecure %></p>
 					<!-- いいね -->
-					<% if @post.favorited_by?(current_user) %>
-	                    <%= link_to post_favorites_path(@post), method: :delete do %>
-	                      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-	                      <%= @post.favorites.count %>
-	                    <% end %>
-	                <% else %>
-	                    <%= link_to post_favorites_path(@post), method: :post do %>
-	                      <i class="far fa-heart" aria-hidden="true"></i>
-	                      <%= @post.favorites.count %>
-	                    <% end %>
-	                <% end %>
-					<!-- ここまで -->
-					<!-- コメント -->
-					<%= link_to post_path(@post) do %>
-						<i class="fas fa-comment-alt"></i>
-						<%= @post.comments.count %>
-					<% end %>
+					<div style="margin: 10px 0 0 40px;float: left;margin-left: 400px;">
+						<% if @post.favorited_by?(current_user) %>
+		                    <%= link_to post_favorites_path(@post), method: :delete do %>
+		                      <i class="fas fa-star" aria-hidden="true" style="color: #FFCC00;"></i>
+		                      <%= @post.favorites.count %>
+		                    <% end %>
+		                <% else %>
+		                    <%= link_to post_favorites_path(@post), method: :post do %>
+		                      <i class="far fa-star" aria-hidden="true"></i>
+		                      <%= @post.favorites.count %>
+		                    <% end %>
+		                <% end %>
+						<!-- ここまで -->
+						<!-- コメント -->
+						<%= link_to post_path(@post) do %>
+							<i class="fas fa-comment-alt"></i>
+							<%= @post.comments.count %>
+						<% end %>
+					</div>
 					<!-- ここまで -->
 				</div>
 				<div class="row" style="margin: 30px;width: 700px;height:450px;overflow:auto;">

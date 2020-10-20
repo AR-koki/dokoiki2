@@ -1,4 +1,17 @@
 <div class="container-fluid">
+    <div class='row'>
+      <% if @post.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@post.errors.count, "error") %> errors prohibited this obj from being saved:</h2>
+
+          <ul>
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
     <div class="col-lg-10 col-lg-offset-2" style="height:700px;margin-top: 50px;">
     	<%= form_with model:@post, local: true do |f| %>
     	<div class="col-lg-6" style="margin-top: 150px;">

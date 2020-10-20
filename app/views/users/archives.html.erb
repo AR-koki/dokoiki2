@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container-fluid">
 	<!-- サイドバー -->
-	<div class="col-lg-3 sidebar clearfix">
+	<div class="col-lg-3 sidebar">
 	<%= render 'users/user', user: @user %>
-	<%= render 'users/archive', archives: @archives, post: @post %>
+	<%= render 'users/archive', archives: @archives, post: @post, user: @user %>
 	</div>
 	<!-- ここまで -->
-	<div class="col-lg-8 col-lg-offset-1">
+	<div class="col-lg-8 col-lg-offset-1"style="width: 760px;height:700px;overflow:auto;">
 		<!-- スライド -->
 		<div class="row">
 			<div id="skippr">

@@ -25,8 +25,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
-    redirect_to post_path(@post)
+    if @post.save
+      redirect_to post_path(@post), notice: "投稿を追加"
+    else
+      render 'posts/new'
+    end
   end
 
   def edit
@@ -36,22 +39,17 @@ class PostsController < ApplicationController
 
   def update
   	@post = Post.find(params[:id])
-  	@post.update(post_params)
-  	redirect_to post_path(@post)
+  	if @post.update(post_params)
+  	 redirect_to post_path(@post)
+    else
+      render 'posts/edit'
+    end
   end
 
   def destroy
   	@post = Post.find(params[:id])
   	@post.destroy
-  	redirect_to root_path
-  end
-
-  def archives
-    @user = User.find(params[:id])
-    @post = Post.find(params[:id])
-    @archives = @post.divide_monthly
-    @yyyymm = params[:yyyymm]
-    @posts = @user.posts.where("strftime('%Y%m', posts.created_at) = '"+@yyyymm+"'")
+  	redirect_to posts_path(current_user)
   end
 
   private
