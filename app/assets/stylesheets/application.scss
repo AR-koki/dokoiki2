@@ -18,12 +18,34 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.image1 {
-	background-image: url(1.jpg);
+.head-title {
+  padding-top: 10px;
+  color: #665e4d;
+  font-size: 20px;
 }
-.image2 {
-	background-image: url(2.jpg);
+
+body{
+	margin:0;
 }
-.image3 {
-	background-image: url(3.jpg);
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.container-fluid{
+	background-color: #fff7e6;
+}
+.sidebar{
+	padding: 30px;
+	margin: 0 0 30px 30px;
+	width: 285px;
+	height:700px;
+	overflow:auto;
+	border-right: solid 1px #b2e1ed;
+}
+.posts{
+	border: 1px solid #edb2c4;
+	margin: 10px 10px 10px 0;
+	float: left;
+	background-color: #ffffff
 }

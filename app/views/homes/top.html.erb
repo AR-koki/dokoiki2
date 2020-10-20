@@ -1,7 +1,23 @@
-<div class="container">
-	<div class="row top_skippr">
-		<div class="image1"></div>
-		<div class="image2"></div>
-		<div class="image3"></div>
+<div class="homes">
+	<div class="homes_top clearfix" style="width: 100%;height: 800px;">
+		<div class="homes_top_main">
+			<a class="homes_top_about btn" style="color:white;text-decoration: none;font-size: 30px;">どこイキ</a>
+			<p class="homes_top_about_content">
+				旅行先の写真を共有,鑑賞を目的としたサービスです。<br>
+				旅行によく行かれる方、旅行先を決めかねている方に利用していただければ幸いです。
+			</p>
+		</div>
+		<div class="homes_top_sub">
+			<%= link_to "ログイン", new_user_session_path, class: "top_main_head_login", style: "color:white;text-decoration: none;" %>
+			<span>/</span>
+			<%= link_to "新規登録", new_user_registration_path, class: "top_main_head_signup", style: "color:white;text-decoration: none;" %>
+		</div>
 	</div>
 </div>
+<script>
+	$('.homes_top_about_content').hide();
+	$('.homes_top_about').click( function()
+{
+	$('.homes_top_about_content').slideToggle() ;
+} ) ;
+</script>
