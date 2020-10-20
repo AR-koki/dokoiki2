@@ -32,9 +32,9 @@ class User < ApplicationRecord
 
   # 月別集計
   def divide_monthly
-    @archives = user.posts.group("strftime(Arel.sql('%Y%m', posts.created_at))")
-     .order("strftime(Arel.sql('%Y%m', posts.created_at)) desc")
-     .count
+    @archives = user.posts.group("strftime(Arel.sql('%Y%m', posts.created_at))").
+      order("strftime(Arel.sql('%Y%m', posts.created_at)) desc").
+      count
   end
 
   # バリデーション

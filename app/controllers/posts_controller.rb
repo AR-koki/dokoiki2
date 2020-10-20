@@ -18,8 +18,8 @@ class PostsController < ApplicationController
   end
 
   # def favorites
-    # post_ids = current_user.favorites.pluck(:post_id)
-    # @posts = Post.where(id: post_ids)
+  # post_ids = current_user.favorites.pluck(:post_id)
+  # @posts = Post.where(id: post_ids)
   # end
 
   def create
@@ -33,23 +33,23 @@ class PostsController < ApplicationController
   end
 
   def edit
-  	@post = Post.find(params[:id])
-  	@user = current_user
+    @post = Post.find(params[:id])
+    @user = current_user
   end
 
   def update
-  	@post = Post.find(params[:id])
-  	if @post.update(post_params)
-  	 redirect_to post_path(@post)
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to post_path(@post)
     else
       render 'posts/edit'
     end
   end
 
   def destroy
-  	@post = Post.find(params[:id])
-  	@post.destroy
-  	redirect_to posts_path(current_user)
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path(current_user)
   end
 
   private
