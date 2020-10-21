@@ -5,20 +5,12 @@
 			<div class="posts" style="width: 240px;height: 260px;">
 				<div class="row" style="margin: 10px 0 15px 10px;">
 					<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
-					<p style="padding: 10px 0 0 40px;float: left"><%= post.prefecure %></p>
+					<p style="padding: 10px 0 0 40px;float: left;"><%= post.prefecure %></p>
 					<!-- いいね -->
-					<div style="margin: 10px 0 0 40px;float: left">
-						<% if post.favorited_by?(current_user) %>
-		                    <%= link_to post_favorites_path(post), method: :delete do %>
-		                      <i class="fas fa-star" aria-hidden="true" style="color: #FFCC00;"></i>
-		                      <%= post.favorites.count %>
-		                    <% end %>
-		                <% else %>
-		                    <%= link_to post_favorites_path(post), method: :post do %>
-		                      <i class="far fa-star" aria-hidden="true"></i>
-		                      <%= post.favorites.count %>
-		                    <% end %>
-		                <% end %>
+					<div style="margin: 10px 10px 0 0;float: right;">
+						<div id="favorites_buttons_<%= post.id %>"style="float: left;margin-right: 10px;">
+							<%= render 'favorites/favorite', post: post %>
+						</div>
 						<!-- ここまで -->
 						<!-- コメント -->
 						<%= link_to post_path(post) do %>

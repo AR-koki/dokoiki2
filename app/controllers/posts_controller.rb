@@ -17,11 +17,6 @@ class PostsController < ApplicationController
     @recommendeds = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
   end
 
-  # def favorites
-  # post_ids = current_user.favorites.pluck(:post_id)
-  # @posts = Post.where(id: post_ids)
-  # end
-
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
