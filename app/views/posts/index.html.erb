@@ -5,31 +5,33 @@
 	<h2 class="text-center">ランキング</h2>
 		<%= render 'posts/ranking', recommendeds: @recommendeds %>
 	</div>
-	<!-- ここまで -->
-	<div class="col-lg-8 col-lg-offset-1"style="width: 760px;height:700px;overflow:auto;">
+	<!-- -------- -->
+	<div class="col-lg-8 col-lg-offset-1 posts-posts">
 		<div class="row">
 			<% @posts.each do |post| %>
-			<div class="posts" style="width: 240px;height: 290px;">
-				<div class="row" style="margin: 10px 0 15px 10px;">
+			<div class="posts-posts__box">
+				<div class="row posts-posts__box__infomation">
 					<%= link_to user_path(post.user) do %>
-						<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
+						<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40' %>
 					<% end %>
-					<p style="padding: 10px 0 0 40px;float: left"><%= post.prefecure %></p>
-					<!-- いいね -->
-					<div style="margin: 10px 10px 0 0;float: right;">
+					<p><%= post.prefecure %></p>
+					<!-- お気に入り、コメント -->
+					<div class="posts-posts__box__infomation__favorite">
+						<!-- お気に入り -->
 						<div id="favorites_buttons_<%= post.id %>"style="float: left;margin-right: 10px;">
 							<%= render 'favorites/favorite', post: post %>
 						</div>
-						<!-- ここまで -->
+						<!-- ------ -->
 						<!-- コメント -->
 						<%= link_to post_path(post) do %>
 							<i class="fas fa-comment-alt"></i>
 							<%= post.comments.count %>
 						<% end %>
+						<!-- ------- -->
 					</div>
-					<!-- ここまで -->
+					<!-- -------- -->
 				</div>
-				<div class="row" style="margin-left: 10px;">
+				<div class="row posts-posts__box__image">
 					<%= link_to post_path(post) do %>
 						<% if post.post_images.count == 1  %>
 							<% post.post_images.each do |post_image| %>
@@ -50,7 +52,7 @@
 						<% end %>
 					<% end %>
 				</div>
-				<div class="row" style="margin: 20px 0 15px 20px;">
+				<div class="row posts-posts__box__body">
 					<%= post.body.truncate(35) %>
 				</div>
 			</div>

@@ -12,15 +12,12 @@
         </div>
       <% end %>
     </div>
-    <div class="col-lg-10 col-lg-offset-2" style="height:700px;margin-top: 50px;">
+    <div class="col-lg-10 col-lg-offset-2 posts-edit">
         <h2>投稿編集</h2>
-        <div class="row">
-            <div id="image-box-1">
-              <div class="item-num-0" id="image-box__container"></div>
-            </div>
+        <div class="row posts-edit__box">
         	<%= form_with model:@post, local: true do |f| %>
-        	<div class="col-lg-6">
-        		<div class="row item-image" style="width: 500px;height: 450px;margin: 10px 10px 10px 0;float: left;">
+        	<div class="col-lg-6 posts-edit__box__post">
+        		<div class="row posts-edit__box__post__image">
                     <% if @post.post_images.count == 1  %>
                         <% @post.post_images.each do |post_image| %>
                             <%= attachment_image_tag post_image, :post_image, size: "480x400", format: 'jpeg',style: "object-fit: contain;border: 1px solid #dcdcdc;margin-top: 5px;" %>
@@ -43,23 +40,23 @@
                     <%= f.attachment_field :post_images_post_images, multiple: true %>
                 </div>
         	</div>
-        	<div class="col-lg-6">
-        		<div class="row" style="margin-top: 50px;">
+        	<div class="col-lg-6 posts-edit__box__details">
+        		<div class="row posts-edit__box__details__prefectures">
         			<div class="col-xs-3">都道府県<br>(撮影場所)</div>
         			<div class="col-xs-9">
                     	<%= f.select :prefecure, Post.prefecures.keys, {}, {class: 'hoge'} %>
                     </div>
                 </div>
-                <div class="row" style="margin-top: 20px;">
+                <div class="row posts-edit__box__details__categorise">
                 	<div class="col-xs-3">カテゴリー</div>
                 	<div class="col-xs-9">
                    		<%= f.select :category, Post.categories.keys, {}, {class: 'fuga'} %>
                    	</div>
                 </div>
-                <div class="row" style="margin-top: 20px;">
+                <div class="row posts-edit__box__details__body">
                 	<%= f.text_area :body,size: "40x7" %>
                 </div>
-                <div class="row" style="margin-top: 20px;">
+                <div class="row posts-edit__box__details__submit">
                 	<%= f.submit "投稿" %>
                 </div>
         	</div>
