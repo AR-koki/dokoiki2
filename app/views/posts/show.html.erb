@@ -46,7 +46,7 @@
 		<div class="row posts-show__comments">
 			<% @post.comments.each do |comment| %>
 			<li style="list-style: none;">
-				<div class="row posts-show__comments__comment" style="">
+				<div class="row posts-show__comments__comment">
 	              <div class="col-xs-1">
 	              	<div class="row">
 		                <%= link_to user_path(comment.user.id) do %>
@@ -57,7 +57,7 @@
 	                  <%= link_to @post.user.name,user_path(@post.user.id) %>
 	                </div>
 	              </div>
-	              <div class="col-xs-9" style="word-wrap: break-word;"><%= comment.comment %></div>
+	              <div class="col-xs-9 posts-show__comments__comment__body"><%= comment.comment %></div>
 	              <div class="col-xs-2">
 	                <% if comment.user_id == current_user.id %>
 	                  <%= link_to post_comment_path(comment.post, comment), method: :delete do%>

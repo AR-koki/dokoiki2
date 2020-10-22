@@ -1,13 +1,13 @@
 <div class="container-fluid">
-	<div class="row"style="margin: 20px 0 0 50px;">'<%= word %>'の検索結果</div>
-	<div class="row" style="margin-left: 200px;width: 1100px;height:700px;overflow:auto;">
+	<div class="row searched-result">'<%= word %>'の検索結果</div>
+	<div class="searched-posts">
 			<% @posts.each do |post| %>
-			<div class="posts" style="width: 240px;height: 260px;">
-				<div class="row" style="margin: 10px 0 15px 10px;">
+			<div class="searched-posts__post">
+				<div class="row searched-posts__post__infomation">
 					<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
-					<p style="padding: 10px 0 0 40px;float: left;"><%= post.prefecure %></p>
+					<p><%= post.prefecure %></p>
 					<!-- いいね -->
-					<div style="margin: 10px 10px 0 0;float: right;">
+					<div class="searched-posts__post__infomation__favorite">
 						<div id="favorites_buttons_<%= post.id %>"style="float: left;margin-right: 10px;">
 							<%= render 'favorites/favorite', post: post %>
 						</div>
@@ -20,7 +20,7 @@
 					</div>
 					<!-- ここまで -->
 				</div>
-				<div class="row" style="margin-left: 10px;">
+				<div class="row searched-posts__post__image">
 					<%= link_to post_path(post) do %>
 						<% if post.post_images.count == 1  %>
 							<% post.post_images.each do |post_image| %>
@@ -42,7 +42,7 @@
 					<% end %>
 				</div>
 				<!-- 内容 -->
-				<div class="row" style="margin: 10px 0 15px 20px;">
+				<div class="row searched-posts__post__body">
 					<%= post.body.truncate(35) %>
 				</div>
 			</div>

@@ -18,7 +18,7 @@
 		<%= render 'users/archive', archives: @archives, post: @post %>
 	</div>
 	<!-- ここまで -->
-	<div class="col-lg-8 col-lg-offset-1"style="width: 760px;height:700px;overflow:auto;">
+	<div class="col-lg-8 col-lg-offset-1 users-show"style="width: 760px;height:700px;">
 		<!-- スライド -->
 		<div class="row">
 			<div class="skippr" style="height: 400px;">
@@ -50,12 +50,12 @@
 		<!-- 投稿一覧 -->
 		<div class="row">
 			<% @posts.each do |post| %>
-			<div class="posts" style="width: 240px;height: 310px;">
-				<div class="row" style="margin: 10px 0 15px 10px;">
+			<div class="users-show__posts">
+				<div class="row users-show__posts__infomation">
 					<%= attachment_image_tag @user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
-					<p style="padding: 10px 0 0 40px;float: left"><%= post.prefecure %></p>
+					<p><%= post.prefecure %></p>
 					<!-- いいね -->
-					<div style="margin: 10px 10px 0 0;float: right;">
+					<div class="users-show__posts__infomation__favorite">
 						<div id="favorites_buttons_<%= post.id %>"style="float: left;margin-right: 10px;">
 							<%= render 'favorites/favorite', post: post %>
 						</div>
@@ -68,7 +68,7 @@
 					</div>
 					<!-- ここまで -->
 				</div>
-				<div class="row" style="margin-left: 10px;">
+				<div class="row users-show__posts__post">
 					<%= link_to post_path(post) do %>
 						<% if post.post_images.count == 1  %>
 							<% post.post_images.each do |post_image| %>
@@ -91,19 +91,19 @@
 				</div>
 				<!-- 編集、削除 -->
 				<% if @post.user_id == current_user.id %>
-					<div class="text-right">
+					<div class="text-right users-show__posts__edit">
 						<%= link_to edit_post_path(post) do %>
 						  <i class="fas fa-cog"></i>
 						<% end %>
 						<%= link_to post_path(post),method: :delete do %>
-						  <i class="fas fa-trash-alt" style="margin: 20px 30px 0 10px; "></i>
+						  <i class="fas fa-trash-alt"></i>
 						<% end %>
 					</div>
 				<% else %>
-					<div class="row" style="margin: 20px 30px 0 10px;"></div>
+					<div class="row text-right users-show__posts__else"></div>
 				<% end %>
 				<!-- 内容 -->
-				<div class="row" style="margin: 10px 0 15px 20px;">
+				<div class="rowtext-right users-show__posts__body">
 					<%= post.body.truncate(35) %>
 				</div>
 			</div>

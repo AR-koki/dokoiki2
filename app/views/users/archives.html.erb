@@ -5,25 +5,16 @@
 	<%= render 'users/archive', archives: @archives, post: @post, user: @user %>
 	</div>
 	<!-- ここまで -->
-	<div class="col-lg-8 col-lg-offset-1"style="width: 760px;height:700px;overflow:auto;">
-		<!-- スライド -->
-		<div class="row">
-			<div id="skippr">
-			  <% @posts.each do |post| %>
-			  	<div>
-			  	</div>
-			  <% end %>
-			</div>
-		</div>
+	<div class="col-lg-8 col-lg-offset-1 users-archives">
 		<!-- 投稿一覧 -->
-		<div class="row">
+		<div class="row users-archives__posts">
 			<% @posts.each do |post| %>
-			<div style="width: 240px;height: 310px;border: 1px solid black;margin: 10px 10px 10px 0;float: left;">
-				<div class="row" style="margin: 10px 0 15px 10px;">
+			<div class="users-archives__posts__post">
+				<div class="row users-archives__posts__post__infomation">
 					<%= attachment_image_tag @user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
-					<p style="padding: 10px 0 0 40px;float: left"><%= post.prefecure %></p>
-					<!-- いいね -->
-					<div style="margin: 10px 0 0 40px;float: left">
+					<p><%= post.prefecure %></p>
+					<div class="users-archives__posts__post__infomation__favorite">
+						<!-- お気に入り -->
 						<% if post.favorited_by?(current_user) %>
 		                    <%= link_to post_favorites_path(post), method: :delete do %>
 		                      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
@@ -35,16 +26,16 @@
 		                      <%= post.favorites.count %>
 		                    <% end %>
 		                <% end %>
-						<!-- ここまで -->
+						<!-- --------- -->
 						<!-- コメント -->
 						<%= link_to post_path(post) do %>
 							<i class="fas fa-comment-alt"></i>
 							<%= post.comments.count %>
 						<% end %>
+						<!-- ------- -->
 					</div>
-					<!-- ここまで -->
 				</div>
-				<div class="row" style="margin-left: 10px;">
+				<div class="row users-archives__posts__post__image">
 					<%= link_to post_path(post) do %>
 						<% if post.post_images.count == 1  %>
 							<% post.post_images.each do |post_image| %>
@@ -67,19 +58,19 @@
 				</div>
 				<!-- 編集、削除 -->
 				<% if @post.user_id == current_user.id %>
-					<div class="text-right">
+					<div class="text-right users-archives__posts__post__edit">
 						<%= link_to edit_post_path(post) do %>
 						  <i class="fas fa-cog"></i>
 						<% end %>
 						<%= link_to post_path(post),method: :delete do %>
-						  <i class="fas fa-trash-alt" style="margin: 20px 30px 0 10px; "></i>
+						  <i class="fas fa-trash-alt"></i>
 						<% end %>
 					</div>
 				<% else %>
-					<div class="row" style="margin: 20px 30px 0 10px;"></div>
+					<div class="row users-archives__posts__post__else"></div>
 				<% end %>
 				<!-- 内容 -->
-				<div class="row" style="margin: 10px 0 15px 20px;">
+				<div class="row users-archives__posts__post__body">
 					<%= post.body.truncate(35) %>
 				</div>
 			</div>

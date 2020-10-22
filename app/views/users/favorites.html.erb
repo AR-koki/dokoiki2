@@ -5,45 +5,43 @@
 	<%= render 'users/archive', archives: @archives, post: @post %>
 	</div>
 	<!-- ここまで -->
-	<div class="col-lg-8 col-lg-offset-1" style="width: 760px;height:660px;overflow:auto;">
+	<div class="col-lg-8 col-lg-offset-1 users-favorites">
 		<div class="row" >
 			<% @favorites.each do |favorite| %>
-				<div class="posts" style="width: 240px;height: 220px;">
-					<div class="row" style="margin: 5px 0 5px 0px;">
-						<div class="row" style="margin: 5px;">
-							<%= link_to post_path(favorite.post) do %>
-								<% if favorite.post.post_images.count == 1  %>
-									<% favorite.post.post_images.each do |post_image| %>
-										<%= attachment_image_tag post_image, :post_image, size: "220x148", format: 'jpeg',style: "object-fit: contain;border: 1px solid #dcdcdc;margin-top: 5px;" %>
-									<% end %>
-								<% elsif favorite.post.post_images.count == 2 %>
-									<% favorite.post.post_images.each do |post_image| %>
-										<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin: 50px 0 33px 0;border: 1px solid #dcdcdc;" %>
-									<% end %>
-								<% elsif favorite.post.post_images.count == 3 %>
-									<% favorite.post.post_images.each do |post_image| %>
-										<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
-									<% end %>
-								<% else  %>
-									<% favorite.post.post_images.each do |post_image| %>
-										<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
-									<% end %>
+				<div class="users-favorites__posts">
+					<div class="row users-favorites__posts__image">
+						<%= link_to post_path(favorite.post) do %>
+							<% if favorite.post.post_images.count == 1  %>
+								<% favorite.post.post_images.each do |post_image| %>
+									<%= attachment_image_tag post_image, :post_image, size: "220x148", format: 'jpeg',style: "object-fit: contain;border: 1px solid #dcdcdc;margin-top: 5px;" %>
+								<% end %>
+							<% elsif favorite.post.post_images.count == 2 %>
+								<% favorite.post.post_images.each do |post_image| %>
+									<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin: 50px 0 33px 0;border: 1px solid #dcdcdc;" %>
+								<% end %>
+							<% elsif favorite.post.post_images.count == 3 %>
+								<% favorite.post.post_images.each do |post_image| %>
+									<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
+								<% end %>
+							<% else  %>
+								<% favorite.post.post_images.each do |post_image| %>
+									<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
 								<% end %>
 							<% end %>
-						</div>
-						<div class="row" style="padding: 10px 0 0 0px;">
-							<div class="col-xs-4"style="margin-left: 10px;"><%= favorite.post.prefecure %></div>
-							<!-- いいね -->
-							<div class="col-xs-5 col-xs-offset-2">
-								<div id="favorites_buttons_<%= favorite.post.id %>"style="float: left;margin-right: 10px;">
-									<%= render 'favorites/favorite', post: favorite.post %>
-								</div>
-				                <!-- コメント -->
-								<%= link_to post_path(favorite.post) do %>
-									<i class="fas fa-comment-alt"></i>
-									<%= favorite.post.comments.count %>
-								<% end %>
+						<% end %>
+					</div>
+					<div class="row users-favorites__posts__infomation">
+						<div class="col-xs-4 users-favorites__posts__infomation__prefecure"><%= favorite.post.prefecure %></div>
+						<!-- いいね -->
+						<div class="col-xs-5 col-xs-offset-2">
+							<div id="favorites_buttons_<%= favorite.post.id %>"style="float: left;margin-right: 10px;">
+								<%= render 'favorites/favorite', post: favorite.post %>
 							</div>
+			                <!-- コメント -->
+							<%= link_to post_path(favorite.post) do %>
+								<i class="fas fa-comment-alt"></i>
+								<%= favorite.post.comments.count %>
+							<% end %>
 						</div>
 					</div>
 				</div>

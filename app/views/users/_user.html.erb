@@ -1,4 +1,4 @@
-<div class="row sidebar__profile--edit pull-right" style="width: 50px;">
+<div class="row users-sidebar__edit pull-right">
 	<!-- 編集、フォロー -->
 	<% if current_user == user %>
 		<%= link_to edit_user_path(user) do %>
@@ -23,21 +23,21 @@
 	<% end %>
 	<!-- ここまで -->
 </div>
-<div class="row sidebar__profile">
-	<div class="col-xs-6 sidebar__profile--image" style="border-radius: 20px;">
+<div class="row users-sidebar__profile">
+	<div class="col-xs-6 users-sidebar__profile__image">
 		<%= attachment_image_tag user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'80x80', style: "border-radius: 50%;" %>
 	</div>
-	<div class="col-xs-6 sidebar__profile--name">
+	<div class="col-xs-6 users-sidebar__profile__name">
 		<%= user.name %>
 	</div>
 </div>
-<div class="row sidebar__profile--introduction"style="height: 130px;margin-top: 20px;word-wrap: break-word;">
+<div class="row users-sidebar__introduction">
 	<%= user.introduction %>
 </div>
-<div class="row sidebar__follow"style="width: 90%;margin: 10px auto;">
+<div class="row users-sidebar__follow"style="margin: 10px auto;">
 	<%= link_to "フォロー一覧", user_follows_path(user),class: "btn btn-info btn-block" %>
 </div>
-<div class="row sidebar__favorite"style="width: 90%;margin: 10px auto;">
+<div class="row users-sidebar__favorite"style="margin: 10px auto;">
 	<%= link_to "お気に入り一覧", favorites_all_path(user),class: "btn btn-warning btn-block" %>
 </div>
 

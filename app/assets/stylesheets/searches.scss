@@ -1,3 +1,59 @@
 // Place all the styles related to the searches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.searches {
+	margin-left: 150px;
+	padding-top: 50px;
+	&-map {
+		margin-left: 50px;
+	}
+	&-category {
+		margin: 20px 0;
+		padding-left: 30px;
+	}
+	&-word {
+		margin: 10px 0 20px 0;
+		padding-left: 30px;
+	}
+}
+
+.searched-result {
+	margin-top: 20px;
+	padding-left: 50px;
+}
+.searched-posts {
+	margin: 0 auto;
+	width: 1000px;
+	height:700px;
+	overflow:auto;
+	&__post {
+		width: 240px;
+		height: 260px;
+		border: 1px solid #edb2c4;
+		margin: 10px 10px 10px 0;
+		float: left;
+		background-color: #ffffff;
+		&__infomation {
+			margin: 10px 0;
+			padding-left: 25px;
+			& p {
+				padding: 10px 0 0 40px;
+				float: left;
+			}
+			&__favorite {
+				margin: 10px 25px 0 0;
+				float: right;
+			}
+		}
+		&__image {
+			padding-left: 25px;
+		}
+		&__body {
+			width: 250px;
+			margin: 15px 0;
+			padding-left: 30px;
+			word-wrap: break-word;
+		}
+	}
+}

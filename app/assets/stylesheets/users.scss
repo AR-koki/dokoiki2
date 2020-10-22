@@ -5,3 +5,153 @@
 .sidebar__conquer{
 	margin: 50px 0;
 }
+
+.users-show {
+	overflow:auto;
+	&__posts {
+		width: 240px;
+		height: 310px;
+		border: 1px solid #edb2c4;
+		margin: 10px 10px 10px 0;
+		float: left;
+		background-color: #ffffff;
+		&__infomation{
+			margin: 10px 0 15px 0;
+			padding-left: 25px;
+			& p {
+				padding: 10px 0 0 40px;
+				float: left;
+			}
+			&__favorite {
+				margin: 10px 25px 0 0;
+				float: right;
+			}
+		}
+		&__post {
+			padding-left: 23px;
+		}
+		&__edit {
+			& .fa-trash-alt {
+				margin: 20px 20px 0 10px;
+			}
+		}
+		&__else {
+			margin: 20px 30px 0 10px;
+		}
+		&__body {
+			margin: 10px 0 15px 20px;
+		}
+	}
+}
+
+.users-favorites {
+	width: 760px;
+	height:660px;
+	overflow:auto;
+	&__posts {
+		width: 240px;
+		height: 220px;
+		border: 1px solid #edb2c4;
+		margin: 10px 10px 10px 0;
+		float: left;
+		background-color: #ffffff;
+		&__image {
+			margin: 5px 0;
+			padding-left: 25px;
+		}
+		&__infomation {
+			padding-top: 10px;
+			&__prefecure {
+				margin-left: 10px;
+			}
+		}
+	}
+}
+
+.users-archives {
+	width: 760px;
+	height:700px;
+	overflow:auto;
+	&__posts {
+		&__post {
+			width: 240px;
+			height: 310px;
+			border: 1px solid #edb2c4;
+			margin: 10px 10px 10px 0;
+			float: left;
+			background-color: #ffffff;
+			&__infomation {
+				margin: 10px 0 15px 0;
+				padding-left: 25px;
+				& p {
+					padding: 10px 0 0 40px;
+					float: left
+				}
+				&__favorite {
+					margin: 10px 25px 0 0;
+					float: right;
+				}
+			}list-style:none;
+			&__image {
+				padding-left: 25px;
+			}
+			&__edit {
+				& .fa-trash-alt {
+					margin: 20px 20px 0 10px;
+				}
+			}
+			&__else {
+				margin: 20px 30px 0 10px;
+			}
+			&__body {
+				margin: 10px 0 15px 0;
+				padding-left: 30px;
+			}
+		}
+	}
+}
+
+.users-sidebar {
+	&__edit {
+		width: 50px;
+	}
+	&__introduction {
+		height: 130px;
+		margin-top: 20px;
+		word-wrap: break-word;
+	}
+	&__follow {
+		width: 90%;
+	}
+	&__favorite {
+		width: 90%;
+	}
+}
+
+.users-archive {
+	&__head {
+		text-align: center;
+		margin: 20px 0 0 15px;
+	}
+	&__month {
+		list-style:none;
+		margin: 0 0 10px 40px;
+	}
+}
+
+.users-edit {
+	height:700px;
+	margin-top: 50px;
+	&__image {
+		margin-top: 50px;
+	}
+	&__profile {
+		margin-top: 70px;
+		&__introduction {
+			margin-top: 20px;
+		}
+		&__submit {
+			margin-top: 20px;
+		}
+	}
+}

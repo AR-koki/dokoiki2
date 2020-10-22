@@ -1,10 +1,10 @@
 <div class="container-fluid">
-	<div style="margin-left: 150px;padding-top: 50px;">
+	<div class="searches">
 		<div class="row">地図から検索</div>
-		<div id="map-container" style="margin-left: 50px;"></div>
+		<div id="map-container" class="searches-map"></div>
 		<div class="row"></div>
 		<div class="row">カテゴリーから検索</div>
-		<div class="row" style="margin: 20px 0 20px 30px;">
+		<div class="row searches-category">
 			<%= form_with url: category_searched_path, method: :get, local: true do |f| %>
 				<%= f.hidden_field :id, :value => 1 %>
 				<%= f.submit Post.categories.key(1),style: "float: left;" %>
@@ -27,7 +27,7 @@
 			<% end %>
 		</div>
 		<div class="row">ワードから検索</div>
-		<div class="row" style="margin: 10px 0 20px 30px;">
+		<div class="row searches-word">
 			<%= form_with url: word_searched_path, method: :get, local: true do |f| %>
 			<%= f.text_field :word %>
 			<%= button_tag :type => "submit" do %>
