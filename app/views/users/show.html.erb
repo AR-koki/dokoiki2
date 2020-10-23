@@ -95,7 +95,7 @@
 						<%= link_to edit_post_path(post) do %>
 						  <i class="fas fa-cog"></i>
 						<% end %>
-						<%= link_to post_path(post),method: :delete do %>
+						<%= link_to post_path(post),method: :delete, "data-confirm" => "本当に削除しますか？" do %>
 						  <i class="fas fa-trash-alt"></i>
 						<% end %>
 					</div>

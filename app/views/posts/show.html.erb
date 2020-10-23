@@ -1,8 +1,8 @@
 <div class="container-fluid">
 	<!-- サイドバー -->
 	<div class="col-lg-3 sidebar">
-	<%= render 'users/user', user: @user %>
-	<%= render 'users/archive', archives: @archives, post: @post, user: @user %>
+	<%= render 'users/user', user: @post.user %>
+	<%= render 'users/archive', archives: @archives, post: @post %>
 	</div>
 	<!-- -------- -->
 	<div class="col-lg-8 col-lg-offset-1 posts-show">
@@ -38,7 +38,7 @@
 					<%= attachment_image_tag post_image, :post_image, size: "700x400", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
 				<% end %>
 			</div>
-			<div class="row posts-show__box__body" style="">
+			<div class="row posts-show__box__body">
 				<%= @post.body %>
 			</div>
 		</div>
