@@ -1,26 +1,37 @@
-<div class="container">
-	<div class="col-lg-6 col-lg-offset-3" style="margin-top: 50px;">
+<div class="container-fluid">
+	<div class='row'>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> errors prohibited this obj from being saved:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+	<div class="col-lg-6 col-lg-offset-3 users-edit">
 		<h2>プロフィール編集</h2>
 		<%= form_with model:@user, local: true do |f| %>
-			<div style="margin-top: 50px;">
-				<div class="col-xs-4">
-					<div class="user-image" style="margin-bottom: 30px;">
-	                    <%= attachment_image_tag @user, :user_image, :fill, 300, 300, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'300x300', style: "border-radius: 50%;margin-bottom: 30px;" %>
-	                </div>
-					<%= f.attachment_field :user_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+			<div class="col-xs-4 users-edit__image">
+				<div class="user-image" style="margin-bottom: 30px;">
+                    <%= attachment_image_tag @user, :user_image, :fill, 300, 300, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'300x300', style: "border-radius: 50%;margin-bottom: 30px;" %>
+                </div>
+				<%= f.attachment_field :user_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+			</div>
+			<div class="col-xs-4 col-xs-offset-4 users-edit__profile">
+				<div class="row users-edit__profile__name">
+					<p>名前</p>
+					<%= f.text_field :name %>
 				</div>
-				<div class="col-xs-4 col-xs-offset-4" style="margin-top: 20px;">
-					<div class="row">
-						<p>名前</p>
-						<%= f.text_field :name %>
-					</div>
-					<div class="row" style="margin-top: 20px;">
-						<p>自己紹介</p>
-						<%= f.text_area :introduction %>
-					</div>
-					<div class="row" style="margin-top: 20px;">
-						<%= f.submit "編集を保存" %>
-					</div>
+				<div class="row users-edit__profile__introduction">
+					<p>自己紹介</p>
+					<%= f.text_area :introduction %>
+				</div>
+				<div class="row users-edit__profile__submit">
+					<%= f.submit "編集を保存" %>
 				</div>
 			</div>
 		<% end %>

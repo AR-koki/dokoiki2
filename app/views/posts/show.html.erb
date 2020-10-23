@@ -1,78 +1,79 @@
-<div class="container">
+<div class="container-fluid">
 	<!-- サイドバー -->
-	<div class="col-lg-3 sidebar clearfix">
-	<%= render 'users/user', user: @user %>
+	<div class="col-lg-3 sidebar">
+	<%= render 'users/user', user: @post.user %>
 	<%= render 'users/archive', archives: @archives, post: @post %>
 	</div>
-	<!-- ここまで -->
-	<div class="col-lg-8 col-lg-offset-1 scroll">
-		<div class="row">
-			<div style="border: 1px solid black;margin-bottom: 10px;">
-				<div class="row" style="margin: 15px 0 15px 30px;">
-					<%= link_to user_path(@post.user) do %>
-						<%= attachment_image_tag @post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
-					<% end %>
-					<p style="padding: 10px 0 0 80px;"><%= @post.prefecure %></p>
-					<!-- いいね -->
-					<% if @post.favorited_by?(current_user) %>
-	                    <%= link_to post_favorites_path(@post), method: :delete do %>
-	                      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-	                      <%= @post.favorites.count %>
-	                    <% end %>
-	                <% else %>
-	                    <%= link_to post_favorites_path(@post), method: :post do %>
-	                      <i class="far fa-heart" aria-hidden="true"></i>
-	                      <%= @post.favorites.count %>
-	                    <% end %>
-	                <% end %>
-					<!-- ここまで -->
+	<!-- -------- -->
+	<div class="col-lg-8 col-lg-offset-1 posts-show">
+		<div class="flash">
+	  		<% if flash[:notice] %>
+	  			<p><i class="far fa-check-square"></i><%= flash[:notice] %></p>
+	  		<% end %>
+	  	</div>
+		<div class="row posts-show__box">
+			<div class="row posts-show__box__infomation">
+				<%= link_to user_path(@post.user) do %>
+					<%= attachment_image_tag @post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
+				<% end %>
+				<p><%= @post.prefecure %></p>
+				<!-- お気に入り、コメント -->
+				<div class="posts-show__box__infomation__favorite">
+					<!-- お気に入り -->
+					<div id="favorites_buttons_<%= @post.id %>"style="float: left;margin-right: 10px;">
+						<%= render 'favorites/favorite', post: @post %>
+					</div>
+					<!-- --------- -->
 					<!-- コメント -->
 					<%= link_to post_path(@post) do %>
 						<i class="fas fa-comment-alt"></i>
 						<%= @post.comments.count %>
 					<% end %>
-					<!-- ここまで -->
+					<!-- ------ -->
 				</div>
-				<div class="row" style="margin: 30px;width: 700px;height:450px;overflow:auto;">
-					<% @post.post_images.each do |post_image| %>
-						<%= attachment_image_tag post_image, :post_image, size: "700x400", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
-					<% end %>
-				</div>
-				<div class="row" style="margin: 15px 15px 15px 30px;word-wrap: break-word;">
-					<%= @post.body %>
-				</div>
+				<!-- ----------------- -->
+			</div>
+			<div class="row posts-show__box__image" style="margin: 0 30px;">
+				<% @post.post_images.each do |post_image| %>
+					<%= attachment_image_tag post_image, :post_image, size: "700x400", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
+				<% end %>
+			</div>
+			<div class="row posts-show__box__body">
+				<%= @post.body %>
 			</div>
 		</div>
 		<!-- コメント -->
-		<div class="row">
+		<div class="row posts-show__comments">
 			<% @post.comments.each do |comment| %>
 			<li style="list-style: none;">
-				<div class="row" style="margin: 25px 0;border-bottom: 1px solid #dcdcdc;padding-bottom: 15px;">
-	              <div class="col-xs-2">
+				<div class="row posts-show__comments__comment">
+	              <div class="col-xs-1">
 	              	<div class="row">
 		                <%= link_to user_path(comment.user.id) do %>
 		                  <%= attachment_image_tag comment.user, :user_image, :fill, 40, 40, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
 		                <% end %>
 		            </div>
-	                <div class="row">
+	                <div class="row posts-show__comments__comment_name">
 	                  <%= link_to @post.user.name,user_path(@post.user.id) %>
 	                </div>
 	              </div>
-	              <div class="col-xs-8"><%= comment.comment %></div>
+	              <div class="col-xs-9 posts-show__comments__comment__body"><%= comment.comment %></div>
 	              <div class="col-xs-2">
 	                <% if comment.user_id == current_user.id %>
-	                  <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete ,class: "btn btn-danger" %>
+	                  <%= link_to post_comment_path(comment.post, comment), method: :delete do%>
+	                  	<i class="fas fa-window-close" style="font-size: 20px; color: red;"></i>
+	                  <% end %>
 	                <% end %>
 	              </div>
 	            </div>
             </li>
           <% end %>
 		</div>
-		<div class="row">
-        <%= form_with(model: [@post, @comment]) do |f| %>
-          <%= f.text_area :comment, size: "106x5" %>
-          <%= f.submit "送信", class: "btn btn-default" %>
-        <% end %>
-      </div>
+		<div class="row posts-show__new-comment">
+	        <%= form_with(model: [@post, @comment]) do |f| %>
+	          <div><%= f.text_area :comment, size: "106x5" %></div>
+	          <div><%= f.submit "送信", class: "btn btn-default" %></div>
+	        <% end %>
+	    </div>
 	<div>
 </div>

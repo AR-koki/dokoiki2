@@ -1,37 +1,28 @@
 <div class="container-fluid">
-	<!-- サイドバー -->
-	<div class="col-lg-3 sidebar">
-	<%= render 'users/user', user: @user %>
-	<h2 class="text-center">ランキング</h2>
-		<%= render 'posts/ranking', recommendeds: @recommendeds %>
-	</div>
-	<!-- -------- -->
-	<div class="col-lg-8 col-lg-offset-1 posts-posts">
-		<div class="row">
+	<div class="row searched-result">'<%= word %>'の検索結果</div>
+	<div class="searched-posts">
 			<% @posts.each do |post| %>
-			<div class="posts-posts__box">
-				<div class="row posts-posts__box__infomation">
+			<div class="searched-posts__post">
+				<div class="row searched-posts__post__infomation">
 					<%= link_to user_path(post.user) do %>
-						<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40' %>
+						<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
 					<% end %>
 					<p><%= post.prefecure %></p>
-					<!-- お気に入り、コメント -->
-					<div class="posts-posts__box__infomation__favorite">
-						<!-- お気に入り -->
+					<!-- いいね -->
+					<div class="searched-posts__post__infomation__favorite">
 						<div id="favorites_buttons_<%= post.id %>"style="float: left;margin-right: 10px;">
 							<%= render 'favorites/favorite', post: post %>
 						</div>
-						<!-- ------ -->
+						<!-- ここまで -->
 						<!-- コメント -->
 						<%= link_to post_path(post) do %>
 							<i class="fas fa-comment-alt"></i>
 							<%= post.comments.count %>
 						<% end %>
-						<!-- ------- -->
 					</div>
-					<!-- -------- -->
+					<!-- ここまで -->
 				</div>
-				<div class="row posts-posts__box__image">
+				<div class="row searched-posts__post__image">
 					<%= link_to post_path(post) do %>
 						<% if post.post_images.count == 1  %>
 							<% post.post_images.each do |post_image| %>
@@ -52,11 +43,11 @@
 						<% end %>
 					<% end %>
 				</div>
-				<div class="row posts-posts__box__body">
+				<!-- 内容 -->
+				<div class="row searched-posts__post__body">
 					<%= post.body.truncate(35) %>
 				</div>
 			</div>
 			<% end %>
 		</div>
-	<div>
 </div>

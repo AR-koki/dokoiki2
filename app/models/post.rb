@@ -41,12 +41,17 @@ class Post < ApplicationRecord
 
   # 月別集計
   def divide_monthly
-    @archives = user.posts.group("strftime('%Y%m', posts.created_at)")
-     .order("strftime('%Y%m', posts.created_at) desc")
-     .count
+    @archives = user.posts.group("strftime('%Y%m', posts.created_at)").
+      order("strftime('%Y%m', posts.created_at) desc").
+      count
   end
 
   def self.search(word)
-    @post = Post.where("body LIKE?","%#{word}%")
+    @post = Post.where("body LIKE?", "%#{word}%")
   end
+  # バリデーション
+  validates :body, presence: true
+  validates :body, length: { maximum: 200 }
+  validates :category, inclusion: { in: Post.categories.keys }
+  validates :prefecure, inclusion: { in: Post.prefecures.keys }
 end

@@ -9,70 +9,51 @@
   </head>
 
   <body>
-    <div class="header" id="header">
-      <nav class="navbar navbar-main navbar-default" role="navigation" id="slide-nav" style="background-color: #222222; border-color: #222222; border-radius: 0px;">
-        <div class="container relative">
-          <div class="navbar-header" style="color: white;">
-            <h4>どこイキ</h4>
-          </div>
-          <div id="slidemenu">
-            <div class="list">
-              <ul class="nav navbar-nav navbar-right" data-hover="color" data-animations="zoomIn fadeIn fadeInUp fadeIn">
-                <% if user_signed_in? %>
-                  <li class=>
-                    <%= link_to search_path do %>
-                     <i class="fas fa-search"></i>
-                    <% end %>
-                  </li>
-                  <li class=>
-                    <%= link_to posts_path do %>
-                     <i class="glyphicon glyphicon-home" aria-hidden="true"></i>all
-                    <% end %>
-                  </li>
-                  <li class=>
-                    <%= link_to user_path(current_user.id) do %>
-                     <i class="glyphicon glyphicon-home" aria-hidden="true"></i> Home
-                    <% end %>
-                  </li>
+    <% unless current_page?(root_path) %>
+      <div class="header" id="header">
+        <nav class="navbar navbar-main navbar-default" role="navigation" id="slide-nav" style="background-color: ##998e73; border-bottom-color: #c4edb2; border-radius: 0px;height: 30px;margin: 0;">
+          <div class="container relative">
+            <div class="navbar-header" style="color: white;">
+              <div class="head-title">どこイキ</div>
+            </div>
+            <div id="slidemenu">
+              <div class="list">
+                <ul class="nav navbar-nav navbar-right" data-hover="color" data-animations="zoomIn fadeIn fadeInUp fadeIn">
+                  <% if user_signed_in? %>
+                    <li class=>
+                      <%= link_to search_path do %>
+                       <i class="fas fa-search"></i>
+                      <% end %>
+                    </li>
+                    <li class=>
+                      <%= link_to posts_path do %>
+                       <i class="fas fa-list"></i></i>
+                      <% end %>
+                    </li>
+                    <li class=>
+                      <%= link_to user_path(current_user.id) do %>
+                       <i class="glyphicon glyphicon-home" aria-hidden="true"></i>
+                      <% end %>
+                    </li>
 
-                  <li class="">
-                    <%= link_to new_post_path do %>
-                    <i class="glyphicon glyphicon-book" aria-hidden="true"></i> New
-                    <% end %>
-                  </li>
-                  <li class="">
-                    <%= link_to destroy_user_session_path, method: :delete do %>
-                      <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i> logout
-                    <% end %>
-                  </li>
-                <% else %>
-                  <li class="">
-                    <%= link_to root_path do %>
-                      <i class="glyphicon glyphicon-home" aria-hidden="true"></i> Home
-                    <% end %>
-                  </li>
-                  <li class="">
-                    <%= link_to homes_about_path do %>
-                      <i class="glyphicon glyphicon-link" aria-hidden="true"></i> About
-                    <% end %>
-                  </li>
-                  <li class="">
-                    <%= link_to new_user_registration_path do %>
-                      <i class="glyphicon glyphicon-new-window" aria-hidden="true"></i> sign up
-                    <% end %>
-                  </li>
-                  <li class="">
-                    <%= link_to new_user_session_path do %>
-                      <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i> login
-                    <% end %>
-                  </li>
-                <% end %>
-              </ul>
+                    <li class="">
+                      <%= link_to new_post_path do %>
+                      <i class="fas fa-plus-square"></i>
+                      <% end %>
+                    </li>
+                    <li class="">
+                      <%= link_to destroy_user_session_path, method: :delete do %>
+                        <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </nav>
-    </div>
+        </nav>
+      </div>
+    <% end %>
       <%= yield %>
   </body>
 </html>

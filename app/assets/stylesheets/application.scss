@@ -17,3 +17,40 @@
 @import "font-awesome";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.head-title {
+  padding-top: 10px;
+  color: #665e4d;
+  font-size: 20px;
+}
+
+body{
+	margin:0;
+}
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.container-fluid{
+	background-color: #fff7e6;
+}
+.sidebar{
+	padding: 30px 20px 30px 0;
+	margin-bottom: 30px;
+	width: 285px;
+	height:700px;
+	overflow:auto;
+	border-right: solid 1px #b2e1ed;
+}
+.flash{
+	width: 300px;
+	height: 30px;
+	font-size: 15px;
+	color: #deb887;
+	line-height: 30px;
+}
+.user_flash {
+	font-size: 15px;
+	color: #deb887;
+}

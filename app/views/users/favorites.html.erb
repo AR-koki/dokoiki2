@@ -1,43 +1,47 @@
-<div class="container">
+<div class="container-fluid">
 	<!-- サイドバー -->
 	<div class="col-lg-3 sidebar clearfix">
 	<%= render 'users/user', user: @user %>
 	<%= render 'users/archive', archives: @archives, post: @post %>
 	</div>
 	<!-- ここまで -->
-	<div class="col-lg-8 col-lg-offset-1">
+	<div class="col-lg-8 col-lg-offset-1 users-favorites">
 		<div class="row" >
 			<% @favorites.each do |favorite| %>
-				<div style="border: 1px solid black;margin: 5px;float: left;">
-					<div class="row" style="margin: 5px 0 5px 0px;">
-						<div class="row" style="margin: 5px;">
-							<%= link_to post_path(favorite.post) do %>
+				<div class="users-favorites__posts">
+					<div class="row users-favorites__posts__image">
+						<%= link_to post_path(favorite.post) do %>
+							<% if favorite.post.post_images.count == 1  %>
 								<% favorite.post.post_images.each do |post_image| %>
-									<%= attachment_image_tag post_image, :post_image, size: "230x160", format: 'jpeg' %>
+									<%= attachment_image_tag post_image, :post_image, size: "220x148", format: 'jpeg',style: "object-fit: contain;border: 1px solid #dcdcdc;margin-top: 5px;" %>
+								<% end %>
+							<% elsif favorite.post.post_images.count == 2 %>
+								<% favorite.post.post_images.each do |post_image| %>
+									<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin: 50px 0 33px 0;border: 1px solid #dcdcdc;" %>
+								<% end %>
+							<% elsif favorite.post.post_images.count == 3 %>
+								<% favorite.post.post_images.each do |post_image| %>
+									<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
+								<% end %>
+							<% else  %>
+								<% favorite.post.post_images.each do |post_image| %>
+									<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
 								<% end %>
 							<% end %>
-						</div>
-						<div class="row" style="padding: 10px 0 5px 5px;">
-							<div class="col-xs-4"><%= favorite.post.prefecure %></div>
-							<!-- いいね -->
-							<div class="col-xs-4 col-xs-offset-4">
-								<% if favorite.post.favorited_by?(current_user) %>
-				                    <%= link_to post_favorites_path(favorite.post), method: :delete do %>
-				                      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-				                      <%= favorite.post.favorites.count %>
-				                    <% end %>
-				                <% else %>
-				                    <%= link_to post_favorites_path(favorite.post), method: :post do %>
-				                      <i class="far fa-heart" aria-hidden="true"></i>
-				                      <%= @post.favorites.count %>
-				                    <% end %>
-				                <% end %>
-				                <!-- コメント -->
-								<%= link_to post_path(favorite.post) do %>
-									<i class="fas fa-comment-alt"></i>
-									<%= favorite.post.comments.count %>
-								<% end %>
+						<% end %>
+					</div>
+					<div class="row users-favorites__posts__infomation">
+						<div class="col-xs-4 users-favorites__posts__infomation__prefecure"><%= favorite.post.prefecure %></div>
+						<!-- いいね -->
+						<div class="col-xs-5 col-xs-offset-2">
+							<div id="favorites_buttons_<%= favorite.post.id %>"style="float: left;margin-right: 10px;">
+								<%= render 'favorites/favorite', post: favorite.post %>
 							</div>
+			                <!-- コメント -->
+							<%= link_to post_path(favorite.post) do %>
+								<i class="fas fa-comment-alt"></i>
+								<%= favorite.post.comments.count %>
+							<% end %>
 						</div>
 					</div>
 				</div>

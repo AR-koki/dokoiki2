@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid"style="height: 700px;">
   <div class="col-lg-7 col-lg-offset-2">
     <h2>ログイン</h2>
 
@@ -16,17 +16,17 @@
           <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
         </div>
       </div>
-      <div class="row" style="text-align: right; margin: 10px 200px 20px 0;">
+      <div class="row" style="text-align: right; margin: 10px 270px 20px 0;">
       <%= link_to "=>パスワードを忘れた方はこちら", new_user_password_path %>
     </div>
 
-    <div class="row" style="margin: 30px 0 50px 200px; width: 260px; border-radius: 10px;">
+    <div class="row" style="margin: 30px 0 50px 270px; width: 260px; border-radius: 10px;">
         <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
     </div>
 
     <% end %>
 
-  <div class="row" style="padding-left: 290px;">
+  <div class="row" style="padding-left: 350px;">
       新規登録は
       <%= link_to "こちら", new_user_registration_path %>
   </div>

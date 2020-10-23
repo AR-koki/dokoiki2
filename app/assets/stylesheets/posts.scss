@@ -1,3 +1,166 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.posts-posts {
+	width: 760px;
+	height:700px;
+	overflow:auto;
+
+	&__box {
+		width: 240px;
+		height: 290px;
+		border: 1px solid #edb2c4;
+		margin: 10px 10px 10px 0;
+		float: left;
+		background-color: #ffffff;
+
+		&__infomation {
+			margin: 10px 0 15px 10px;
+
+			& img {
+				border-radius: 50%;
+				margin-left: 25px;
+			}
+
+			& p{
+				padding: 10px 0 0 40px;
+				float: left;
+			}
+
+			&__favorite{
+				margin: 10px 25px 0 0;
+				float: right;
+			}
+		}
+
+		&__image {
+			padding-left: 25px;
+		}
+
+		&__body {
+			margin: 20px 0 15px 0;
+			padding-left: 30px;
+		}
+	}
+}
+
+.posts-show {
+	width: 900px;
+	height:700px;
+	overflow:auto;
+
+	&__box {
+		width:780px;
+		border: 1px solid #edb2c4;
+		margin-bottom: 10px;
+		background-color: #ffffff;
+
+		&__infomation {
+			margin: 15px 0 15px 30px;
+
+			& img {
+				border-radius: 50%;
+				margin-left: 30px;
+			}
+
+			& p {
+				padding: 10px 0 0 300px;
+				float: left;
+			}
+
+			&__favorite {
+				margin: 10px 50px 0 0;
+				float: right;
+			}
+		}
+
+		&__image {
+			width: 700px;
+			height:450px;
+			overflow:auto;
+		}
+
+		&__body {
+			width: 690px;
+			margin: 15px 0;
+			padding-left: 50px;
+			word-wrap: break-word;
+		}
+	}
+
+	&__comments {
+		&__comment {
+			margin: 25px 0;
+			border-bottom: 1px solid #edb2c4;
+			padding-bottom: 15px;
+
+			& img {
+				margin-left: 30px;
+			}
+
+			& a {
+				margin-left: 30px;
+			}
+			&__body {
+				word-wrap: break-word;
+				margin-top: 20px;
+			}
+		}
+	}
+}
+
+.posts-edit {
+	height:700px;
+	margin-top: 50px;
+
+	&__box {
+		&__post {
+			&__image {
+				width: 500px;
+				height: 450px;
+				margin: 10px 10px 10px 0;
+				float: left;
+			}
+		}
+		&__details {
+			&__prefectures{
+				margin-top: 50px;
+			}
+
+			&__categorise {
+				margin-top: 20px;
+			}
+
+			&__body {
+				margin-top: 20px;
+			}
+
+			&__submit {
+				margin-top: 20px;
+			}
+		}
+	}
+}
+
+.posts-new {
+	height:700px;
+	margin-top: 50px;
+	&__image {
+		margin-top: 150px;
+	}
+	&__details {
+		margin-top: 50px;
+		&__categorise {
+			margin-top: 30px;
+		}
+
+		&__body {
+			margin-top: 30px;
+		}
+
+		&__submit {
+			margin-top: 20px;
+		}
+	}
+}

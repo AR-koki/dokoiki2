@@ -18,5 +18,5 @@ Rails.application.routes.draw do
   get 'category_searched' => 'searches#category_searched'
   get 'word_searched' => 'searches#word_searched'
   get 'map_searched/:id' => 'searches#map_searched'
-  get '/users/:id/archives/:yyyymm', to: 'posts#archives', as: :post_archive
+  get '/users/:id/archives/:yyyymm', to: 'users#archives', as: :user_archive
 end
