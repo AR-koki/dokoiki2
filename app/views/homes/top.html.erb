@@ -1,42 +1,23 @@
-<div class="container">
-	<!-- サイドバー -->
-	<div class="col-lg-3 sidebar clearfix">
-		<h2 class="text-center">ランキング</h2>
-		<% @recommendeds.each do |post| %>
-			<div class="pull-left" style="width: 200px;  margin-left: 10px;">
-				<p style="padding: 10px 0 0 80px;"><%= post.prefecure %></p>
-				<%= link_to post_path(post) do %>
-				<% post.post_images.each do |post_image| %>
-					<%= attachment_image_tag post_image, :post_image, :fill, 200, 130, format: 'jpeg' %>
-				<% end %>
-					<p style="margin-top: 20px;"></p>
-				<% end %>
-			</div>
-		<% end %>
-	</div>
-	<!-- ここまで -->
-	<div class="col-lg-8 col-lg-offset-1">
-		<div class="row">
-			<% @posts.each do |post| %>
-			<div style="border: 1px solid black;margin-bottom: 10px;">
-				<div class="row" style="margin: 15px 0 15px 30px;">
-					<%= link_to user_path(post.user) do %>
-						<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
-					<% end %>
-					<p style="padding: 10px 0 0 80px;"><%= post.prefecure %></p>
-				</div>
-				<div class="row" style="margin-left: 30px;">
-					<%= link_to post_path(post) do %>
-					<% post.post_images.each do |post_image| %>
-						<%= attachment_image_tag post_image, :post_image, size: "700x400", format: 'jpeg' %>
-					<% end %>
-					<% end %>
-				</div>
-				<div class="row" style="margin: 15px 0 15px 30px;">
-					<%= post.body %>
-				</div>
-			</div>
-			<% end %>
+<div class="homes">
+	<div class="homes_top clearfix" style="width: 100%;height: 800px;">
+		<div class="homes_top_main">
+			<a class="homes_top_about btn" style="color:white;text-decoration: none;font-size: 30px;">どこイキ</a>
+			<p class="homes_top_about_content">
+				旅行先の写真を共有,鑑賞を目的としたサービスです。<br>
+				旅行によく行かれる方、旅行先を決めかねている方に利用していただければ幸いです。
+			</p>
 		</div>
-	<div>
+		<div class="homes_top_sub">
+			<%= link_to "ログイン", new_user_session_path, class: "top_main_head_login", style: "color:white;text-decoration: none;" %>
+			<span>/</span>
+			<%= link_to "新規登録", new_user_registration_path, class: "top_main_head_signup", style: "color:white;text-decoration: none;" %>
+		</div>
+	</div>
 </div>
+<script>
+	$('.homes_top_about_content').hide();
+	$('.homes_top_about').click( function()
+{
+	$('.homes_top_about_content').slideToggle() ;
+} ) ;
+</script>

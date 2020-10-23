@@ -1,35 +1,66 @@
-<div class="container">
-    <h2>投稿編集</h2>
-    <div class="row">
-    	<%= form_with model:@post, local: true do |f| %>
-    	<div class="col-lg-6">
-    		<div class="item-image" style="margin-bottom: 30px;">
-                <% @post.post_images.each do |post_image| %>
-                    <%= attachment_image_tag @post_image, :post_image, fallback: "noimage.png", size:"400x300" %>
-                <% end %>
-            </div>
-            <%= f.attachment_field :post_images_post_images, multiple: true %>
-    	</div>
-    	<div class="col-lg-6">
-    		<div class="row" style="margin-top: 50px;">
-    			<div class="col-xs-3">都道府県<br>(撮影場所)</div>
-    			<div class="col-xs-9">
-                	<%= f.select :prefecure, Post.prefecures.keys, {}, {class: 'hoge'} %>
+<div class="container-fluid">
+    <div class='row'>
+      <% if @post.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@post.errors.count, "error") %> errors prohibited this obj from being saved:</h2>
+
+          <ul>
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-lg-10 col-lg-offset-2 posts-edit">
+        <h2>投稿編集</h2>
+        <div class="row posts-edit__box">
+        	<%= form_with model:@post, local: true do |f| %>
+        	<div class="col-lg-6 posts-edit__box__post">
+        		<div class="row posts-edit__box__post__image">
+                    <% if @post.post_images.count == 1  %>
+                        <% @post.post_images.each do |post_image| %>
+                            <%= attachment_image_tag post_image, :post_image, size: "480x400", format: 'jpeg',style: "object-fit: contain;border: 1px solid #dcdcdc;margin-top: 5px;" %>
+                        <% end %>
+                    <% elsif @post.post_images.count == 2 %>
+                        <% @post.post_images.each do |post_image| %>
+                            <%= attachment_image_tag post_image, :post_image, size: "245x380", format: 'jpeg',style: "object-fit: contain;margin: 50px 0 33px 0;border: 1px solid #dcdcdc;" %>
+                        <% end %>
+                    <% elsif @post.post_images.count == 3 %>
+                        <% @post.post_images.each do |post_image| %>
+                            <%= attachment_image_tag post_image, :post_image, size: "245x220", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
+                        <% end %>
+                    <% else  %>
+                        <% @post.post_images.each do |post_image| %>
+                            <%= attachment_image_tag post_image, :post_image, size: "245x220", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
+                        <% end %>
+                    <% end %>
                 </div>
-            </div>
-            <div class="row" style="margin-top: 20px;">
-            	<div class="col-xs-3">カテゴリー</div>
-            	<div class="col-xs-9">
-               		<%= f.select :category, Post.categories.keys, {}, {class: 'fuga'} %>
-               	</div>
-            </div>
-            <div class="row" style="margin-top: 20px;">
-            	<%= f.text_area :body,size: "40x7" %>
-            </div>
-            <div class="row" style="margin-top: 20px;">
-            	<%= f.submit "投稿" %>
-            </div>
-    	</div>
-    	<% end %>
+                <div class="row">
+                    <%= f.attachment_field :post_images_post_images, multiple: true %>
+                </div>
+        	</div>
+        	<div class="col-lg-6 posts-edit__box__details">
+        		<div class="row posts-edit__box__details__prefectures">
+        			<div class="col-xs-3">都道府県<br>(撮影場所)</div>
+        			<div class="col-xs-9">
+                    	<%= f.select :prefecure, Post.prefecures.keys, {}, {class: 'hoge'} %>
+                    </div>
+                </div>
+                <div class="row posts-edit__box__details__categorise">
+                	<div class="col-xs-3">カテゴリー</div>
+                	<div class="col-xs-9">
+                   		<%= f.select :category, Post.categories.keys, {}, {class: 'fuga'} %>
+                   	</div>
+                </div>
+                <div class="row posts-edit__box__details__body">
+                	<%= f.text_area :body,size: "40x7" %>
+                </div>
+                <div class="row posts-edit__box__details__submit">
+                	<%= f.submit "投稿" %>
+                </div>
+        	</div>
+        	<% end %>
+        </div>
     </div>
 </div>

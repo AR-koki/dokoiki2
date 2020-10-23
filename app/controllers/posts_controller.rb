@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   def new
     @post = Post.new
   end
@@ -16,41 +17,34 @@ class PostsController < ApplicationController
     @recommendeds = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
   end
 
-  # def favorites
-    # post_ids = current_user.favorites.pluck(:post_id)
-    # @posts = Post.where(id: post_ids)
-  # end
-
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
-    redirect_to post_path(@post)
+    if @post.save
+      redirect_to post_path(@post), notice: "投稿を追加"
+    else
+      render 'posts/new'
+    end
   end
 
   def edit
-  	@post = Post.find(params[:id])
-  	@user = current_user
+    @post = Post.find(params[:id])
+    @user = current_user
   end
 
   def update
-  	@post = Post.find(params[:id])
-  	@post.update(post_params)
-  	redirect_to post_path(@post)
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to post_path(@post)
+    else
+      render 'posts/edit'
+    end
   end
 
   def destroy
-  	@post = Post.find(params[:id])
-  	@post.destroy
-  	redirect_to root_path
-  end
-
-  def archives
-    @user = User.find(params[:id])
     @post = Post.find(params[:id])
-    @archives = @post.divide_monthly
-    @yyyymm = params[:yyyymm]
-    @posts = @user.posts.where("strftime('%Y%m', posts.created_at) = '"+@yyyymm+"'")
+    @post.destroy
+    redirect_to posts_path(current_user)
   end
 
   private
