@@ -1,7 +1,9 @@
 <!-- アーカイブ -->
 <div class="row users-archive__head">投稿(月別)</div>
 <ul class="users-archive__month">
-   <% archives.each do |yyyymm, count| %>
-        <li><%= link_to ymconv(yyyymm, @user.posts.count.to_s), user_archive_path(post, yyyymm) %></li>
-   <% end %>
+	<% if archives %>
+    <% archives.each do |yyyymm, count| %>
+      <li><%= link_to ymconv(yyyymm, count.size), user_archive_path(post, yyyymm) %></li>
+    <% end %>
+  <% end %>
 </ul>
