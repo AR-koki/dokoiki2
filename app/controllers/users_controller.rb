@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @post = Post.find(params[:id])
     @posts = @user.posts
     @slider = @user.posts.order("RANDOM()").limit(5)
-    @archives = @post.divide_monthly
+    @archives = @post.divide_monthly if @user.posts.present?
     # 制覇数
     hokkaido = Post.where(user_id: @user, prefecure: 1).count
     if hokkaido > 0
