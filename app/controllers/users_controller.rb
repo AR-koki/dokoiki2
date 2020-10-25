@@ -5,7 +5,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @post = Post.find(params[:id])
     @posts = @user.posts
-    @slider = @user.posts.order("RAND()").limit(5)
+    if Rails.env.development?
+      @slider = @user.posts.order("RANDOM()").limit(5)
+    else
+      @slider = @user.posts.order("RAND()").limit(5)
+    end
     @archives = @post.divide_monthly if @user.posts.present?
     # 制覇数
     hokkaido = Post.where(user_id: @user, prefecure: 1).count
@@ -310,7 +314,7 @@ class UsersController < ApplicationController
     @post = Post.find(params[:id])
     @yyyymm = params[:yyyymm]
     @archives = @post.divide_monthly
-    @posts = @user.posts.where("strftime('%Y%m', posts.created_at) = '" + @yyyymm + "'")
+    @posts = @archives[params[:yyyymm]]
   end
 
   def favorites

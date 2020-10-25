@@ -30,9 +30,14 @@ class User < ApplicationRecord
     followings.include?(other_user)
   end
 
+  # 月別集計
+  def self.divide_monthly
+    user.posts.group_by {|post| "#{post.created_at.year}#{post.created_at.month}" }
+  end
+
   # バリデーション
   validates :name, presence: true
   validates :name, length: { minimum: 2 }
   validates :name, length: { maximum: 20 }
-  validates :introduction, length: { maximum: 50 }
+  validates :introduction, length: { maximum: 150 }
 end

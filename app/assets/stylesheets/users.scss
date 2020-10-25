@@ -115,10 +115,14 @@
 	&__edit {
 		width: 50px;
 	}
-	&__introduction {
-		height: 130px;
-		margin-top: 20px;
-		word-wrap: break-word;
+	&__profile {
+		&__introduction {
+			height: 130px;
+			width: 270px;
+			margin-top: 20px;
+			padding-left: 30px;
+			word-wrap: break-word;
+		}
 	}
 	&__follow {
 		width: 90%;
