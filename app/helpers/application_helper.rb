@@ -4,8 +4,4 @@ module ApplicationHelper
     mm = yyyymm[4, 2]
     yyyy + "年" + mm + "月(" + cnt.to_s + ")"
   end
-  # def ymconv(yyyymm,cnt)
-  #   return yyyymm + " (" + cnt + ")"
-  # end
-
 end

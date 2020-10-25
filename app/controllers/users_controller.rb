@@ -3,14 +3,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @post = Post.find(params[:id])
     @posts = @user.posts
     if Rails.env.development?
       @slider = @user.posts.order("RANDOM()").limit(5)
     else
       @slider = @user.posts.order("RAND()").limit(5)
     end
-    @archives = @post.divide_monthly if @user.posts.present?
+    @archives = Post.divide_monthly(@user)
     # 制覇数
     hokkaido = Post.where(user_id: @user, prefecure: 1).count
     if hokkaido > 0
@@ -311,17 +310,14 @@ class UsersController < ApplicationController
 
   def archives
     @user = User.find(params[:id])
-    @post = Post.find(params[:id])
-    @yyyymm = params[:yyyymm]
-    @archives = @post.divide_monthly
+    @archives = Post.divide_monthly(@user)
     @posts = @archives[params[:yyyymm]]
   end
 
   def favorites
     @user = User.find_by(id: params[:id])
-    @post = Post.find(params[:id])
     @favorites = Favorite.where(user_id: @user.id)
-    @archives = @post.divide_monthly
+    @archives = Post.divide_monthly(@user)
   end
 
   def conquer

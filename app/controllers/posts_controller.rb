@@ -8,7 +8,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @user = current_user
     @comment = Comment.new
-    @archives = @post.divide_monthly
+    @archives = Post.divide_monthly(@user)
   end
 
   def index

@@ -40,8 +40,8 @@ class Post < ApplicationRecord
   end
 
   # 月別集計
-  def divide_monthly
-    user.posts.group_by {|post| "#{post.created_at.year}#{post.created_at.month}" }
+  def self.divide_monthly(user)
+   where(user_id: user).group_by {|post| "#{post.created_at.year}#{post.created_at.month}" }
   end
 
   def self.search(word)

@@ -57,7 +57,7 @@
 					<% end %>
 				</div>
 				<!-- 編集、削除 -->
-				<% if @post.user_id == current_user.id %>
+				<% if @user.id == current_user.id %>
 					<div class="text-right users-archives__posts__post__edit">
 						<%= link_to edit_post_path(post) do %>
 						  <i class="fas fa-cog"></i>

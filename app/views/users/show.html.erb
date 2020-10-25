@@ -15,7 +15,7 @@
 					<% end %>
 				<div class="col-xs-2 sidebar__conquer--foot">/47</div>
 			</div>
-		<%= render 'users/archive', archives: @archives, post: @post %>
+		<%= render 'users/archive', user: @user, archives: @archives %>
 	</div>
 	<!-- ここまで -->
 	<div class="col-lg-8 col-lg-offset-1 users-show"style="width: 760px;height:700px;">
@@ -90,7 +90,7 @@
 					<% end %>
 				</div>
 				<!-- 編集、削除 -->
-				<% if @post.user_id == current_user.id %>
+				<% if @user.id == current_user.id %>
 					<div class="text-right users-show__posts__edit">
 						<%= link_to edit_post_path(post) do %>
 						  <i class="fas fa-cog"></i>
