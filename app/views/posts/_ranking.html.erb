@@ -1,8 +1,8 @@
 <% recommendeds.each do |post| %>
-	<div class="pull-left" style="width: 200px;  margin: 0 0 20px 10px;">
+	<div class="ranking" style="width: 200px;  margin: 0 0 20px 10px;">
 		<p style="padding: 10px 0 0 80px;"><%= post.prefecure %></p>
 		<%= link_to post_path(post) do %>
-			<div style="width: 220px;height: 148px;">
+			<div class="text-center" style="width: 220px;height: 148px;">
 				<% if post.post_images.count == 1  %>
 					<% post.post_images.each do |post_image| %>
 						<%= attachment_image_tag post_image, :post_image, size: "220x148", format: 'jpeg',style: "object-fit: contain;border: 1px solid #dcdcdc;margin-top: 5px;" %>

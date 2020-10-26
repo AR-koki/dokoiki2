@@ -1,11 +1,11 @@
 <div class="container-fluid">
 	<!-- サイドバー -->
-	<div class="col-lg-3 sidebar">
+	<div class="col-xs-3 sidebar">
 	<%= render 'users/user', user: @user %>
 	<%= render 'users/archive', archives: @archives, post: @post, user: @user %>
 	</div>
 	<!-- ここまで -->
-	<div class="col-lg-8 col-lg-offset-1 users-archives">
+	<div class="col-xs-8 col-xs-offset-1 users-archives">
 		<!-- 投稿一覧 -->
 		<div class="row users-archives__posts">
 			<% @posts.each do |post| %>

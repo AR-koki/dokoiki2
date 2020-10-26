@@ -1,6 +1,6 @@
 <div class="container-fluid">
 	<!-- サイドバー -->
-	<div class="col-lg-3 sidebar">
+	<div class="col-xs-3 sidebar">
 			<div class="user_flash">
 		  		<% if flash[:notice] %>
 		  			<p><i class="far fa-check-square"></i><%= flash[:notice] %></p>
@@ -18,12 +18,12 @@
 		<%= render 'users/archive', user: @user, archives: @archives %>
 	</div>
 	<!-- ここまで -->
-	<div class="col-lg-8 col-lg-offset-1 users-show"style="width: 760px;height:700px;">
+	<div class="col-xs-8 col-lg-offset-1 users-show"style="width: 750px;height:700px;">
 		<!-- スライド -->
 		<div class="row">
 			<div class="skippr" style="height: 400px;">
 			  <% @slider.each do |post| %>
-			  	<div style="width: 740;height: 400px;">
+			  	<div style="height: 400px;">
 			  		<%= link_to post_path(post) do %>
 						<% if post.post_images.count == 1  %>
 							<% post.post_images.each do |post_image| %>

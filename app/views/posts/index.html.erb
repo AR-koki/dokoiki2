@@ -1,62 +1,60 @@
 <div class="container-fluid">
 	<!-- サイドバー -->
-	<div class="col-lg-3 sidebar">
+	<div class="col-xs-3 sidebar">
 	<%= render 'users/user', user: @user %>
 	<h2 class="text-center">ランキング</h2>
 		<%= render 'posts/ranking', recommendeds: @recommendeds %>
 	</div>
 	<!-- -------- -->
-	<div class="col-lg-8 col-lg-offset-1 posts-posts">
-		<div class="row">
-			<% @posts.each do |post| %>
-			<div class="posts-posts__box">
-				<div class="row posts-posts__box__infomation">
-					<%= link_to user_path(post.user) do %>
-						<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40' %>
-					<% end %>
-					<p><%= post.prefecure %></p>
-					<!-- お気に入り、コメント -->
-					<div class="posts-posts__box__infomation__favorite">
-						<!-- お気に入り -->
-						<div id="favorites_buttons_<%= post.id %>"style="float: left;margin-right: 10px;">
-							<%= render 'favorites/favorite', post: post %>
-						</div>
-						<!-- ------ -->
-						<!-- コメント -->
-						<%= link_to post_path(post) do %>
-							<i class="fas fa-comment-alt"></i>
-							<%= post.comments.count %>
-						<% end %>
-						<!-- ------- -->
+	<div class="col-xs-8 col-xs-offset-1 posts-posts">
+		<% @posts.each do |post| %>
+		<div class="posts-posts__box">
+			<div class="row posts-posts__box__infomation">
+				<%= link_to user_path(post.user) do %>
+					<%= attachment_image_tag post.user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40' %>
+				<% end %>
+				<p><%= post.prefecure %></p>
+				<!-- お気に入り、コメント -->
+				<div class="posts-posts__box__infomation__favorite">
+					<!-- お気に入り -->
+					<div id="favorites_buttons_<%= post.id %>"style="float: left;margin-right: 10px;">
+						<%= render 'favorites/favorite', post: post %>
 					</div>
-					<!-- -------- -->
-				</div>
-				<div class="row posts-posts__box__image">
+					<!-- ------ -->
+					<!-- コメント -->
 					<%= link_to post_path(post) do %>
-						<% if post.post_images.count == 1  %>
-							<% post.post_images.each do |post_image| %>
-								<%= attachment_image_tag post_image, :post_image, size: "220x148", format: 'jpeg',style: "object-fit: contain;border: 1px solid #dcdcdc;margin-top: 5px;" %>
-							<% end %>
-						<% elsif post.post_images.count == 2 %>
-							<% post.post_images.each do |post_image| %>
-								<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin: 50px 0 33px 0;border: 1px solid #dcdcdc;" %>
-							<% end %>
-						<% elsif post.post_images.count == 3 %>
-							<% post.post_images.each do |post_image| %>
-								<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
-							<% end %>
-						<% else  %>
-							<% post.post_images.each do |post_image| %>
-								<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
-							<% end %>
+						<i class="fas fa-comment-alt"></i>
+						<%= post.comments.count %>
+					<% end %>
+					<!-- ------- -->
+				</div>
+				<!-- -------- -->
+			</div>
+			<div class="row posts-posts__box__image">
+				<%= link_to post_path(post) do %>
+					<% if post.post_images.count == 1  %>
+						<% post.post_images.each do |post_image| %>
+							<%= attachment_image_tag post_image, :post_image, size: "220x148", format: 'jpeg',style: "object-fit: contain;border: 1px solid #dcdcdc;margin-top: 5px;" %>
+						<% end %>
+					<% elsif post.post_images.count == 2 %>
+						<% post.post_images.each do |post_image| %>
+							<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin: 50px 0 33px 0;border: 1px solid #dcdcdc;" %>
+						<% end %>
+					<% elsif post.post_images.count == 3 %>
+						<% post.post_images.each do |post_image| %>
+							<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
+						<% end %>
+					<% else  %>
+						<% post.post_images.each do |post_image| %>
+							<%= attachment_image_tag post_image, :post_image, size: "108x70", format: 'jpeg',style: "object-fit: contain;margin-top: 5px;border: 1px solid #dcdcdc;" %>
 						<% end %>
 					<% end %>
-				</div>
-				<div class="row posts-posts__box__body">
-					<%= post.body.truncate(35) %>
-				</div>
+				<% end %>
 			</div>
-			<% end %>
+			<div class="row posts-posts__box__body">
+				<%= post.body.truncate(35) %>
+			</div>
 		</div>
+		<% end %>
 	<div>
 </div>

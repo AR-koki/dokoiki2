@@ -1,11 +1,11 @@
 <div class="container-fluid">
 	<!-- サイドバー -->
-	<div class="col-lg-3 sidebar">
+	<div class="col-xs-3 sidebar">
 	<%= render 'users/user', user: @post.user %>
 	<%= render 'users/archive', archives: @archives, user: @user %>
 	</div>
 	<!-- -------- -->
-	<div class="col-lg-8 col-lg-offset-1 posts-show">
+	<div class="col-xs-8 col-lg-offset-1 posts-show">
 		<div class="flash">
 	  		<% if flash[:notice] %>
 	  			<p><i class="far fa-check-square"></i><%= flash[:notice] %></p>
