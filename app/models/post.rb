@@ -52,4 +52,13 @@ class Post < ApplicationRecord
   validates :body, length: { maximum: 200 }
   validates :category, inclusion: { in: Post.categories.keys }
   validates :prefecure, inclusion: { in: Post.prefecures.keys }
+
+  validate :validate_images
+  validates :post_images, presence: true
+
+  private
+  def validate_images
+    return if post_images.size <= 4
+    errors.add(:post, 'You can upload max 4 images')
+  end
 end
