@@ -24,6 +24,8 @@
 - 旅行にはいきたいが旅行先を探すのがめんどくさい時
 
 ## 設計書
+https://docs.google.com/spreadsheets/d/1bTb-VnocWhWuXclQS5DEyYlRi5N38m7CXjtETsHlalA/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/1Gy2ZX3Zj9HozeZguPHclBhg5MJhrMICTpBWr52zZe-A/edit?usp=sharing
 
 ### 機能一覧
 https://docs.google.com/spreadsheets/d/1dyAQf0Dp4aRqpXgUtRB0atSJvaBrMDGX-uaug3r7W08/edit?usp=sharing
@@ -36,5 +38,4 @@ https://docs.google.com/spreadsheets/d/1dyAQf0Dp4aRqpXgUtRB0atSJvaBrMDGX-uaug3r7
 - 仮想環境：Vagrant,VirtualBox
 
 ## 使用素材
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
-- 使用しない場合は、使用素材の項目をREADMEから削除してください。
+- https://o-dan.net/ja/
