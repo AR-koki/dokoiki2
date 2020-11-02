@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
+    @posts = @user.posts.order(created_at: :desc)
     if Rails.env.development?
       @slider = @user.posts.order("RANDOM()").limit(5)
     else
@@ -316,7 +316,7 @@ class UsersController < ApplicationController
 
   def favorites
     @user = User.find_by(id: params[:id])
-    @favorites = Favorite.where(user_id: @user.id)
+    @favorites = Favorite.where(user_id: @user.id).order(created_at: :desc)
     @archives = Post.divide_monthly(@user)
   end
 

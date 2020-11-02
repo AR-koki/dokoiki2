@@ -16,7 +16,7 @@ class RelationshipsController < ApplicationController
 
   def follower
     @user = User.find(params[:user_id])
-    @users = @user.followings
+    @users = @user.followings.order(created_at: :desc)
   end
 
   def followed
