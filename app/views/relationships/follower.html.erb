@@ -17,7 +17,11 @@
                   <%= attachment_image_tag user, :user_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size:'40x40', style: "border-radius: 50%;" %>
                 <% end %>
               </td>
-              <td><%= user.name %></td>
+              <td>
+                <%= link_to user_path(user) do %>
+                  <%= user.name %>
+                <% end %>
+              </td>
               <td><%= user.posts.count %></td>
               <td><%= user.followings.count %></td>
               <td>
