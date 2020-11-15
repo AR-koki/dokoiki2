@@ -66,6 +66,14 @@ body{
 	text-align: right;
 	margin: 10px 270px 20px 0;
 }
+.actions {
+	margin: 30px 0 0 250px;
+	width: 300px;
+	border-radius: 10px;
+}
+.session {
+	margin: 50px 0 0 330px;
+}
 @media screen and (max-width:1200px) {
 	.new-pass {
 			margin: 20px auto;
@@ -118,6 +126,13 @@ body{
 	}
 	.new-pass {
 		margin: 20px auto;
+		text-align: center;
+	}
+	.actions {
+		margin: 30px auto;
+	}
+	.session {
+		margin: 30px auto;
 		text-align: center;
 	}
 }
