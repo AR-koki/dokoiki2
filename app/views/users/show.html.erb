@@ -18,12 +18,12 @@
 		<%= render 'users/archive', user: @user, archives: @archives %>
 	</div>
 	<!-- ここまで -->
-	<div class="col-xs-8 col-lg-offset-1 users-show"style="width: 750px;height:700px;">
+	<div class="col-xs-8 col-lg-offset-1 users-show">
 		<!-- スライド -->
 		<div class="row">
-			<div class="skippr" style="height: 400px;">
+			<div class="skippr">
 			  <% @slider.each do |post| %>
-			  	<div style="height: 400px;">
+			  	<div class="skippr-imag">
 			  		<%= link_to post_path(post) do %>
 						<% if post.post_images.count == 1  %>
 							<% post.post_images.each do |post_image| %>

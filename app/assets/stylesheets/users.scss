@@ -5,8 +5,18 @@
 .sidebar__conquer{
 	margin: 50px 0;
 }
+.skippr {
+	height: 400px;
+	width: 780px;
+		&-imag {
+			height: 400px;
+			width: 780px;
+		}
+}
 
 .users-show {
+	width: 750px;
+	height: 700px;
 	overflow:auto;
 	&__posts {
 		width: 240px;
@@ -193,7 +203,39 @@
 			}
 		}
 	}
+}
+@media screen and (max-width:1120px) {
+	.skippr {
+		height: 0;
+	}
+}
+@media screen and (max-width:390px) {
+	.skippr {
+		height: 0;
+	}
+	.users-sidebar {
+		&__edit {
+			width: 50px;
+		}
+		&__profile {
+			&__introduction {
+				height: 130px;
+				width: 270px;
+				margin-top: 20px;
+				padding-left: 30px;
+				word-wrap: break-word;
+			}
+		}
+		&__follow {
+			width: 90%;
+		}
+		&__favorite {
+			width: 90%;
+		}
+	}
 	.users-show {
+		width: 100%;
+		height: 700px;
 		overflow:auto;
 		&__posts {
 			width: 240px;
