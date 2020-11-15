@@ -56,3 +56,68 @@ body{
 .ranking {
 	padding-left: 10%;
 }
+.new-user {
+	padding-left: 350px;
+}
+.login-btn {
+	margin: 30px 0 50px 270px;
+}
+.new-pass {
+	text-align: right;
+	margin: 10px 270px 20px 0;
+}
+@media screen and (max-width:1200px) {
+	.new-pass {
+			margin: 20px auto;
+			text-align: center;
+	}
+	.login {
+		width: 100%;
+		height: 800px;
+		&-main {
+			width: 100%;
+		}
+		&-btn {
+			margin: 30px auto;
+		}
+	}
+	.new-user{
+		padding-left: 0;
+		text-align: center;
+	}
+}
+@media screen and (max-width:425px) {
+	.login {
+		width: 100%;
+		height: 800px;
+		&-main {
+			width: 100%;
+		}
+		&-btn {
+			margin: 30px auto;
+		}
+	}
+	.new-user{
+		padding-left: 0;
+		text-align: center;
+	}
+	.mail {
+		margin-right: 20px;
+		width: 100%;
+	}
+	.mail-field {
+		width: 100%;
+		padding-top: 20px;
+	}
+	.pass {
+		padding-left: 0;
+		text-align: center;
+	}
+	.pass-field{
+		width: 100%;
+	}
+	.new-pass {
+		margin: 20px auto;
+		text-align: center;
+	}
+}
